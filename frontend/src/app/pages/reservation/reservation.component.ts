@@ -10,57 +10,62 @@ import { RestaurantTable, Settings, User } from '../../models';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="relative pt-32 pb-24 px-6">
-      <div class="max-w-5xl mx-auto">
+    <div class="relative pt-32 pb-24 px-6 min-h-screen">
+      <!-- Ambient background glow -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] pointer-events-none opacity-20" style="background: radial-gradient(ellipse, rgba(212,175,55,0.4) 0%, transparent 70%);"></div>
+      
+      <div class="max-w-5xl mx-auto relative z-10">
         
         <!-- Header & Steps -->
-        <div class="text-center mb-16">
-          <h1 class="font-heading text-4xl md:text-5xl text-cream-100 mb-8">Book a Table</h1>
+        <div class="text-center mb-16 animate-in">
+          <p class="section-subtitle">Experience Pócimas</p>
+          <h1 class="font-heading text-4xl md:text-6xl text-cream-100 mb-10">Book Your Table</h1>
           
-          <div class="flex items-center justify-center max-w-md mx-auto">
+          <div class="flex items-center justify-center max-w-lg mx-auto">
             <div [class]="step >= 1 ? 'step-active' : 'step-pending'">1</div>
-            <div [class]="'flex-1 h-px mx-2 ' + (step >= 2 ? 'bg-bronze-500' : 'bg-dark-600')"></div>
+            <div class="flex-1 h-px mx-3" [style.background]="step >= 2 ? 'linear-gradient(90deg, #D4AF37, #D4AF37)' : 'rgba(255,255,255,0.1)'" style="transition: background 0.5s;"></div>
             <div [class]="step >= 2 ? 'step-active' : (step > 1 ? 'step-done' : 'step-pending')">2</div>
-            <div [class]="'flex-1 h-px mx-2 ' + (step >= 3 ? 'bg-bronze-500' : 'bg-dark-600')"></div>
+            <div class="flex-1 h-px mx-3" [style.background]="step >= 3 ? 'linear-gradient(90deg, #D4AF37, #D4AF37)' : 'rgba(255,255,255,0.1)'" style="transition: background 0.5s;"></div>
             <div [class]="step >= 3 ? 'step-active' : 'step-pending'">3</div>
           </div>
-          <div class="flex justify-between max-w-md mx-auto mt-2 px-1 font-accent text-xs uppercase tracking-widest text-dark-500">
-            <span [class]="step >= 1 ? 'text-bronze-400' : ''">Details</span>
-            <span [class]="step >= 2 ? 'text-bronze-400' : ''">Select Table</span>
-            <span [class]="step >= 3 ? 'text-bronze-400' : ''">Confirm</span>
+          <div class="flex justify-between max-w-lg mx-auto mt-3 px-1 font-display text-xs uppercase tracking-[0.2em] text-dark-500">
+            <span [class]="step >= 1 ? 'text-bronze-400' : ''" style="transition: color 0.3s">Details</span>
+            <span [class]="step >= 2 ? 'text-bronze-400' : ''" style="transition: color 0.3s">Select Table</span>
+            <span [class]="step >= 3 ? 'text-bronze-400' : ''" style="transition: color 0.3s">Confirm</span>
           </div>
         </div>
 
-        <div class="card-glass p-8 md:p-12 relative overflow-hidden">
-          <div class="absolute top-0 left-0 w-full h-1 bg-gold-gradient"></div>
+        <div class="card-glass p-8 md:p-12 transition-all duration-500 relative">
+          <!-- Top gold line -->
+          <div class="absolute top-0 left-0 w-full h-[2px]" style="background: linear-gradient(90deg, transparent, #D4AF37, transparent);"></div>
 
-          <!-- STEP 1: Date, Time, Guests -->
-          <div *ngIf="step === 1" class="animate-in">
-            <h2 class="font-heading text-2xl text-cream-100 mb-6">When will you join us?</h2>
+          <!-- STEP 1: Details -->
+          <div *ngIf="step === 1" class="animate-in" style="animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+            <h2 class="font-heading text-3xl text-cream-100 mb-8 text-center">When will you join us?</h2>
             
-            <form [formGroup]="dateTimeForm" (ngSubmit)="checkAvailability()" class="space-y-6">
+            <form [formGroup]="dateTimeForm" (ngSubmit)="checkAvailability()" class="space-y-8 max-w-3xl mx-auto">
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Date</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Date</label>
                   <input formControlName="date" type="date" class="input-field" [min]="minDate">
                 </div>
                 <div>
-                  <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Time</label>
-                  <select formControlName="time" class="input-field bg-dark-700/50">
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Time</label>
+                  <select formControlName="time" class="input-field">
                     <option value="" disabled>Select a time</option>
                     <option *ngFor="let t of timeSlots" [value]="t">{{ t }}</option>
                   </select>
                 </div>
                 <div>
-                  <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Guests</label>
-                  <select formControlName="guests" class="input-field bg-dark-700/50">
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Guests</label>
+                  <select formControlName="guests" class="input-field">
                     <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{ n }} {{ n === 1 ? 'Person' : 'People' }}</option>
                   </select>
                 </div>
               </div>
               
-              <div class="flex justify-end pt-4">
-                <button type="submit" [disabled]="dateTimeForm.invalid || loading" class="btn-primary flex items-center gap-2">
+              <div class="flex justify-center pt-8 border-t border-white/5">
+                <button type="submit" [disabled]="dateTimeForm.invalid || loading" class="btn-primary flex items-center justify-center gap-3 w-full md:w-auto min-w-[200px]">
                   <span *ngIf="loading" class="w-4 h-4 border-2 border-dark-900 border-t-transparent rounded-full animate-spin"></span>
                   Find a Table
                 </button>
@@ -69,105 +74,115 @@ import { RestaurantTable, Settings, User } from '../../models';
           </div>
 
           <!-- STEP 2: Table Selection -->
-          <div *ngIf="step === 2" class="animate-in">
-            <div class="flex justify-between items-end mb-8">
+          <div *ngIf="step === 2" class="animate-in" style="animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 pb-6 border-b border-white/5">
               <div>
-                <h2 class="font-heading text-2xl text-cream-100 mb-2">Select your table</h2>
-                <p class="font-accent text-sm text-cream-400">
+                <h2 class="font-heading text-3xl text-cream-100 mb-2">Select your table</h2>
+                <p class="font-display text-sm text-cream-400">
                   {{ formatDate(dateTimeForm.value.date) }} at {{ dateTimeForm.value.time }} for {{ dateTimeForm.value.guests }} guests
                 </p>
               </div>
-              <button (click)="step = 1" class="font-accent text-xs uppercase tracking-widest text-dark-500 hover:text-bronze-400 transition-colors">
-                ← Change Details
+              <button (click)="step = 1" class="font-display text-xs uppercase tracking-widest text-bronze-400/70 hover:text-bronze-400 transition-colors flex items-center gap-2">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Change Details
               </button>
             </div>
 
             <!-- Legend -->
-            <div class="flex flex-wrap gap-4 mb-8 font-accent text-xs">
-              <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-sm bg-emerald-500/10 border border-emerald-500/60"></div> Available</div>
-              <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-sm bg-amber-500/20 border border-amber-500"></div> Selected</div>
-              <div class="flex items-center gap-2"><div class="w-4 h-4 rounded-sm bg-red-500/10 border border-red-500/60 opacity-70"></div> Reserved/Too Small</div>
+            <div class="flex flex-wrap justify-center gap-8 mb-8 font-display text-xs uppercase tracking-widest text-cream-500">
+              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.3)]"></div> Available</div>
+              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-bronze-400 border border-bronze-400 shadow-gold"></div> Selected</div>
+              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-red-500/10 border border-red-500/40"></div> Unavailable</div>
             </div>
 
-            <!-- Visual Restaurant Map -->
-            <div class="relative bg-dark-900 border border-cream-800/20 rounded-sm w-full max-w-3xl mx-auto overflow-hidden shadow-inner mb-8" style="height: 400px;">
-              <!-- Decorative elements -->
-              <div class="absolute top-0 w-full h-8 bg-dark-800 border-b border-cream-800/30 flex items-center justify-center">
-                <span class="font-accent text-[10px] uppercase tracking-widest text-dark-500">Bar Area</span>
+            <!-- Map -->
+            <div class="relative bg-dark-900/50 border border-white/5 rounded-lg w-full max-w-4xl mx-auto overflow-hidden shadow-inner mb-8" style="height: 450px;">
+              <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 20px 20px;"></div>
+              
+              <div class="absolute top-0 w-full h-10 bg-dark-800/80 backdrop-blur border-b border-white/5 flex items-center justify-center">
+                <span class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">Bar Area</span>
               </div>
-              <div class="absolute bottom-0 w-full h-8 bg-dark-800 border-t border-cream-800/30 flex items-center justify-center">
-                <span class="font-accent text-[10px] uppercase tracking-widest text-dark-500">Window / Street View</span>
+              <div class="absolute bottom-0 w-full h-10 bg-dark-800/80 backdrop-blur border-t border-white/5 flex items-center justify-center">
+                <span class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">Window / Street View</span>
               </div>
 
               <!-- Tables -->
               <ng-container *ngFor="let table of tables">
                 <div 
                   (click)="selectTable(table)"
-                  class="absolute flex items-center justify-center flex-col"
+                  class="absolute flex items-center justify-center flex-col shadow-lg backdrop-blur-sm"
                   [ngClass]="getTableClass(table)"
                   [ngStyle]="getTableStyle(table)">
                   
-                  <span class="font-heading font-bold text-lg mb-1">{{ table.table_number }}</span>
-                  <div class="flex gap-1">
-                    <svg *ngFor="let i of [].constructor(table.capacity)" class="w-2 h-2 opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <span class="font-heading font-bold text-xl mb-1 drop-shadow-md">{{ table.table_number }}</span>
+                  <div class="flex gap-1 flex-wrap justify-center px-2">
+                    <div *ngFor="let i of [].constructor(table.capacity)" class="w-1.5 h-1.5 rounded-full bg-current opacity-60"></div>
                   </div>
                 </div>
               </ng-container>
             </div>
 
-            <div class="flex justify-between items-center pt-4 border-t border-cream-800/20">
-              <p class="font-accent text-sm text-cream-400">
-                <span *ngIf="selectedTable">Selected: Table {{ selectedTable.table_number }} (Capacity: {{ selectedTable.capacity }})</span>
-                <span *ngIf="!selectedTable">Please select an available table on the map.</span>
-              </p>
-              <button (click)="goToStep3()" [disabled]="!selectedTable" class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
+            <div class="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/5 gap-6">
+              <div class="font-display text-sm">
+                <div *ngIf="selectedTable" class="flex items-center gap-3 text-cream-100">
+                  <span class="text-bronze-400">Selected:</span> 
+                  <span>Table {{ selectedTable.table_number }} (Cap: {{ selectedTable.capacity }})</span>
+                </div>
+                <div *ngIf="!selectedTable" class="text-cream-500 flex items-center gap-2">
+                  <svg class="w-4 h-4 animate-pulse text-bronze-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+                  Please select an available table
+                </div>
+              </div>
+              <button (click)="goToStep3()" [disabled]="!selectedTable" class="btn-primary w-full md:w-auto">
                 Continue to Details
               </button>
             </div>
           </div>
 
-          <!-- STEP 3: Contact Info & Confirm -->
-          <div *ngIf="step === 3" class="animate-in">
-            <div class="flex justify-between items-end mb-8">
+          <!-- STEP 3: Confirm -->
+          <div *ngIf="step === 3" class="animate-in" style="animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 pb-6 border-b border-white/5">
               <div>
-                <h2 class="font-heading text-2xl text-cream-100 mb-2">Complete your reservation</h2>
-                <p class="font-accent text-sm text-cream-400">
-                  Reservation fee: <span class="text-bronze-400 font-bold">€{{ settings?.reservation_fee | number:'1.2-2' }}</span> (Deducted from final bill)
+                <h2 class="font-heading text-3xl text-cream-100 mb-2">Complete your reservation</h2>
+                <p class="font-display text-sm text-cream-400">
+                  Reservation fee: <span class="text-bronze-400 font-semibold text-lg ml-1">€{{ settings?.reservation_fee | number:'1.2-2' }}</span> <span class="text-xs opacity-70 ml-2">(Deducted from final bill)</span>
                 </p>
               </div>
-              <button (click)="step = 2" class="font-accent text-xs uppercase tracking-widest text-dark-500 hover:text-bronze-400 transition-colors">
-                ← Change Table
+              <button (click)="step = 2" class="font-display text-xs uppercase tracking-widest text-bronze-400/70 hover:text-bronze-400 transition-colors flex items-center gap-2">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Change Table
               </button>
             </div>
 
-            <form [formGroup]="contactForm" (ngSubmit)="submitReservation()" class="space-y-5">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <form [formGroup]="contactForm" (ngSubmit)="submitReservation()" class="space-y-6 max-w-3xl mx-auto">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Full Name *</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Full Name *</label>
                   <input formControlName="customer_name" class="input-field" placeholder="John Doe">
                 </div>
                 <div>
-                  <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Email *</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Email *</label>
                   <input formControlName="customer_email" type="email" class="input-field" placeholder="john@example.com">
                 </div>
-                <div>
-                  <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Phone Number *</label>
+                <div class="md:col-span-2">
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Phone Number *</label>
                   <input formControlName="customer_phone" class="input-field" placeholder="+33 1 23 45 67 89">
                 </div>
               </div>
               <div>
-                <label class="font-accent text-xs uppercase tracking-widest text-cream-400 mb-2 block">Special Requests (Optional)</label>
+                <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Special Requests <span class="text-dark-500 lowercase">(Optional)</span></label>
                 <textarea formControlName="special_request" rows="3" class="input-field resize-none" placeholder="Allergies, anniversaries..."></textarea>
               </div>
 
-              <div *ngIf="error" class="bg-red-500/10 border border-red-500/30 text-red-400 p-4 rounded-sm font-accent text-sm">
+              <div *ngIf="error" class="bg-red-900/20 border border-red-500/30 text-red-400 p-4 rounded-md font-display text-sm flex items-start gap-3">
+                <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 {{ error }}
               </div>
 
-              <div class="flex justify-end pt-6 border-t border-cream-800/20">
-                <button type="submit" [disabled]="contactForm.invalid || loading" class="btn-primary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              <div class="flex justify-end pt-8 border-t border-white/5">
+                <button type="submit" [disabled]="contactForm.invalid || loading" class="btn-primary flex items-center justify-center gap-3 w-full md:w-auto min-w-[250px]">
                   <span *ngIf="loading" class="w-4 h-4 border-2 border-dark-900 border-t-transparent rounded-full animate-spin"></span>
-                  {{ loading ? 'Confirming...' : 'Confirm Reservation' }}
+                  {{ loading ? 'Processing...' : 'Confirm Reservation' }}
                 </button>
               </div>
             </form>
@@ -259,10 +274,10 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   getTableClass(table: RestaurantTable): string {
     if (table.availability_status === 'reserved' || !table.suitable) {
-      return 'table-reserved';
+      return 'table-reserved text-red-400';
     }
     if (this.selectedTable?.id === table.id) {
-      return 'table-selected';
+      return 'table-selected text-bronze-900';
     }
     return 'table-available text-emerald-400';
   }
@@ -271,17 +286,17 @@ export class ReservationComponent implements OnInit, OnDestroy {
     // Determine dimensions based on shape and capacity to make it look realistic
     let width = 60;
     let height = 60;
-    let borderRadius = '4px';
+    let borderRadius = '8px';
 
     if (table.shape === 'round') {
       borderRadius = '50%';
       width = table.capacity > 4 ? 90 : 70;
       height = width;
     } else if (table.shape === 'rectangle') {
-      width = 100;
-      height = 60;
+      width = 110;
+      height = 70;
     } else { // square
-      width = table.capacity > 2 ? 80 : 60;
+      width = table.capacity > 2 ? 80 : 65;
       height = width;
     }
 
@@ -291,7 +306,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
       width: `${width}px`,
       height: `${height}px`,
       borderRadius: borderRadius,
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -50%)',
+      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
     };
   }
 
@@ -329,7 +345,6 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   formatDate(dateStr: string): string {
     if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    return new Date(dateStr).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   }
 }
-

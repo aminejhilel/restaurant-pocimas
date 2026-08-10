@@ -1,143 +1,214 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { Settings, MenuCategory } from '../../models';
+import { Settings } from '../../models';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, RouterLink],
+  styles: [`
+    .hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      animation: heroFloat 12s ease-in-out infinite;
+    }
+    @keyframes heroFloat {
+      0%, 100% { transform: scale(1.04) translateY(0); }
+      50%       { transform: scale(1.08) translateY(-12px); }
+    }
+    .hero-noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+    .stat-card:hover .stat-value { text-shadow: 0 0 30px rgba(212,175,55,0.6); }
+    .dish-card { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s ease; }
+    .dish-card:hover { transform: translateY(-10px); box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 40px rgba(212,175,55,0.08); }
+    .gallery-item img { transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, rgba(212,175,55,0.8), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50%       { opacity: 1;   transform: scaleY(1); }
+    }
+    .hero-word { display: inline-block; opacity: 0; animation: wordIn 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes wordIn {
+      from { opacity: 0; transform: translateY(60px) rotateX(20deg); }
+      to   { opacity: 1; transform: translateY(0)   rotateX(0); }
+    }
+  `],
   template: `
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <!-- Background -->
-      <div class="absolute inset-0 bg-gradient-to-b from-dark-900/60 via-dark-900/40 to-dark-900 z-10"></div>
-      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')] bg-cover bg-center animate-float"></div>
+
+    <!-- ═══════════════════════════════════════════ HERO ═══ -->
+    <section class="relative min-h-screen flex items-end overflow-hidden" style="perspective:1200px">
+
+      <!-- Background layers -->
+      <div class="absolute inset-0 hero-bg"></div>
+      <div class="absolute inset-0 hero-noise opacity-60"></div>
+      <!-- Cinematic dark vignette overlay -->
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.97) 100%);"></div>
+      <!-- Subtle left side dark edge -->
+      <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 50%);"></div>
 
       <!-- Hero Content -->
-      <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
-        <p class="section-subtitle mb-6 animate-in">Est. 1987 · Paris, France</p>
-        <h1 class="font-heading text-6xl md:text-8xl text-cream-100 leading-none mb-6 animate-in" style="animation-delay:0.1s">
-          Pócimas <span class="text-gradient italic">Restaurante</span>
-        </h1>
-        <p class="font-accent text-lg text-cream-300 max-w-xl mx-auto mb-10 leading-relaxed animate-in" style="animation-delay:0.2s">
-          Where culinary artistry meets timeless elegance. An unforgettable dining experience awaits you.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-in" style="animation-delay:0.3s">
-          <a routerLink="/reservation" class="btn-primary">Reserve a Table</a>
-          <a routerLink="/menu" class="btn-outline">View Menu</a>
+      <div class="relative z-20 w-full pb-28 md:pb-36 px-6 md:px-16 lg:px-24">
+        <div class="max-w-7xl mx-auto">
+
+          <!-- Eyebrow label -->
+          <div class="flex items-center gap-4 mb-6" style="animation: wordIn 0.6s ease forwards;">
+            <div class="h-px w-12" style="background: linear-gradient(to right, transparent, #D4AF37);"></div>
+            <p class="font-display text-bronze-400 uppercase tracking-[0.3em] text-xs">Fine Dining · Est. 1987</p>
+          </div>
+
+          <!-- Main title — word-by-word entrance -->
+          <h1 class="font-heading text-white leading-none mb-3" style="font-size: clamp(3.5rem, 10vw, 9rem);">
+            <span class="hero-word" style="animation-delay:0.05s">Pócimas</span>
+          </h1>
+          <h1 class="font-heading leading-none mb-8" style="font-size: clamp(3.5rem, 10vw, 9rem); background: linear-gradient(90deg, #835709 0%, #D4AF37 40%, #f0d980 60%, #D4AF37 80%, #835709 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite, wordIn 0.8s 0.1s cubic-bezier(0.16,1,0.3,1) both;">
+            Restaurante
+          </h1>
+
+          <p class="font-display text-cream-400 max-w-xl mb-10 leading-relaxed" style="font-size:1.05rem; animation: wordIn 0.8s 0.25s ease both;">
+            Where culinary artistry meets timeless elegance. An unforgettable dining experience awaits.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4" style="animation: wordIn 0.8s 0.38s ease both;">
+            <a routerLink="/reservation" class="btn-primary">Reserve a Table</a>
+            <a routerLink="/menu" class="btn-outline">Explore Menu</a>
+          </div>
         </div>
       </div>
 
       <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <div class="w-px h-12 bg-gradient-to-b from-bronze-500 to-transparent mx-auto"></div>
+      <div class="absolute bottom-8 right-12 z-20 flex flex-col items-center gap-3">
+        <p class="font-display text-bronze-400/60 uppercase tracking-[0.2em] text-[10px]" style="writing-mode:vertical-rl">Scroll</p>
+        <div class="scroll-line"></div>
       </div>
     </section>
 
-    <!-- About snippet -->
-    <section class="py-24 px-6">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <!-- ═══════════════════════════════════════════ INTRO STRIP ═══ -->
+    <div class="py-12 border-y overflow-hidden" style="border-color: rgba(212,175,55,0.12); background: linear-gradient(90deg, #000 0%, #080808 50%, #000 100%);">
+      <div class="flex gap-16 items-center justify-center flex-wrap px-8">
+        <div *ngFor="let stat of stats" class="stat-card text-center group cursor-default">
+          <div class="stat-value font-heading text-5xl text-gradient mb-1 transition-all duration-300">{{ stat.value }}</div>
+          <div class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ ABOUT ═══ -->
+    <section class="py-28 px-6">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <!-- Text -->
         <div>
           <p class="section-subtitle">A Taste of Excellence</p>
-          <h2 class="section-title mb-6">Crafted With Passion,<br>Served With Love</h2>
-          <div class="gold-divider"></div>
-          <p class="font-accent text-cream-400 leading-relaxed mb-4">
-            Nestled in the heart of Paris, Pócimas Restaurante has been a sanctuary for those who appreciate the finer things in life. 
-            Our kitchen is led by award-winning chefs who transform the finest seasonal ingredients into extraordinary culinary masterpieces.
+          <h2 class="section-title mb-2">Crafted With Passion,</h2>
+          <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mb-4" style="-webkit-text-fill-color: transparent; background: linear-gradient(90deg, #835709 0%, #D4AF37 40%, #f0d980 60%, #D4AF37 80%, #835709 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; animation: shimmer 4s linear infinite;">Served With Love</h2>
+          <div class="gold-divider" style="margin-left:0; margin-right:auto;"></div>
+          <p class="font-display text-cream-400 leading-relaxed mb-5" style="font-size:0.95rem;">
+            Nestled in the heart of Paris, Pócimas Restaurante has been a sanctuary for those who appreciate the finer things in life.
+            Our kitchen is led by award-winning chefs who transform the finest seasonal ingredients into extraordinary masterpieces.
           </p>
-          <p class="font-accent text-cream-400 leading-relaxed mb-8">
+          <p class="font-display text-cream-500 leading-relaxed mb-10" style="font-size:0.95rem;">
             Every meal is a journey through French culinary tradition, reimagined with contemporary flair and presented with unwavering attention to detail.
           </p>
           <a routerLink="/our-story" class="btn-outline">Our Story</a>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" 
-                 alt="Dish" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+        <!-- Asymmetric photo grid -->
+        <div class="grid grid-cols-2 gap-3 h-[500px]">
+          <div class="gallery-item row-span-2 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80"
+                 alt="Restaurant ambiance" class="w-full h-full object-cover">
           </div>
-          <div class="aspect-square overflow-hidden mt-8">
-            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" 
-                 alt="Restaurant" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+          <div class="gallery-item overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80"
+                 alt="Signature dish" class="w-full h-full object-cover">
           </div>
-          <div class="aspect-square overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" 
-                 alt="Chef" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
-          </div>
-          <div class="aspect-square overflow-hidden mt-8">
-            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" 
-                 alt="Food" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+          <div class="gallery-item overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80"
+                 alt="Plating" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Featured Dishes -->
-    <section class="py-24 px-6 bg-dark-800/50">
+    <!-- ═══════════════════════════════════════════ FEATURED DISHES ═══ -->
+    <section class="py-28 px-6" style="background: linear-gradient(180deg, #000 0%, #060606 50%, #000 100%);">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
           <p class="section-subtitle">Chef's Selection</p>
           <h2 class="section-title">Featured Dishes</h2>
-          <div class="gold-divider w-24 mx-auto"></div>
+          <div class="gold-divider"></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div *ngFor="let dish of featuredDishes" class="card-glass overflow-hidden group hover:border-bronze-500/40 transition-all duration-500 hover:-translate-y-2">
-            <div class="aspect-video overflow-hidden">
-              <img [src]="dish.image" [alt]="dish.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div *ngFor="let dish of featuredDishes; let i = index"
+               class="dish-card card-glass overflow-hidden group cursor-default"
+               [style.animation-delay]="(i * 0.12) + 's'">
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <img [src]="dish.image" [alt]="dish.name"
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <!-- Category badge -->
+              <div class="absolute top-3 left-3 px-3 py-1" style="background: rgba(0,0,0,0.7); border: 1px solid rgba(212,175,55,0.3);">
+                <span class="font-display text-[10px] text-bronze-400 uppercase tracking-widest">{{ dish.category }}</span>
+              </div>
             </div>
-            <div class="p-6">
-              <span class="font-accent text-xs text-bronze-400 uppercase tracking-widest">{{ dish.category }}</span>
-              <h3 class="font-heading text-xl text-cream-100 mt-2 mb-3">{{ dish.name }}</h3>
-              <p class="font-accent text-sm text-cream-400 leading-relaxed mb-4">{{ dish.description }}</p>
-              <span class="font-accent font-semibold text-bronze-400 text-lg">€{{ dish.price }}</span>
+            <div class="p-7">
+              <h3 class="font-heading text-2xl text-cream-100 mb-3">{{ dish.name }}</h3>
+              <p class="font-display text-sm text-cream-500 leading-relaxed mb-5">{{ dish.description }}</p>
+              <div class="flex items-center justify-between">
+                <span class="font-display font-semibold text-bronze-400 text-xl">€{{ dish.price }}</span>
+                <div class="h-px flex-1 mx-4" style="background: linear-gradient(to right, rgba(212,175,55,0.2), transparent);"></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="text-center mt-12">
+        <div class="text-center mt-16">
           <a routerLink="/menu" class="btn-outline">View Full Menu</a>
         </div>
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="py-16 px-6 bg-dark-900 border-y border-cream-800/10">
-      <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-        <div *ngFor="let stat of stats">
-          <div class="font-heading text-4xl text-gradient mb-2">{{ stat.value }}</div>
-          <div class="font-accent text-sm text-dark-500 uppercase tracking-widest">{{ stat.label }}</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery -->
-    <section class="py-24 px-6">
+    <!-- ═══════════════════════════════════════════ GALLERY ═══ -->
+    <section class="py-28 px-6">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-20">
           <p class="section-subtitle">Moments</p>
           <h2 class="section-title">A Glimpse Inside</h2>
-          <div class="gold-divider w-24 mx-auto"></div>
+          <div class="gold-divider"></div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          <div *ngFor="let img of galleryImages; let i = index" 
-               [class]="'overflow-hidden ' + (i === 0 || i === 5 ? 'col-span-2 row-span-2' : '')">
-            <img [src]="img" alt="Gallery" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700 min-h-[200px]">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          <div *ngFor="let img of galleryImages; let i = index"
+               class="gallery-item overflow-hidden"
+               [class]="(i === 0 || i === 5) ? 'col-span-2 row-span-2' : ''"
+               [style.minHeight]="(i === 0 || i === 5) ? '400px' : '200px'">
+            <img [src]="img" alt="Gallery" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="relative py-32 px-6 overflow-hidden">
-      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1920&q=80')] bg-cover bg-center"></div>
-      <div class="absolute inset-0 bg-dark-900/80"></div>
+    <!-- ═══════════════════════════════════════════ CTA ═══ -->
+    <section class="relative py-40 px-6 overflow-hidden">
+      <div class="absolute inset-0" style="background-image: url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1920&q=80'); background-size:cover; background-position:center; background-attachment:fixed;"></div>
+      <div class="absolute inset-0" style="background: rgba(0,0,0,0.88);"></div>
+      <!-- Gold ambient glow -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div style="width:600px; height:600px; background: radial-gradient(ellipse, rgba(212,175,55,0.07) 0%, transparent 70%);"></div>
+      </div>
       <div class="relative z-10 text-center max-w-2xl mx-auto">
         <p class="section-subtitle">Experience Fine Dining</p>
         <h2 class="section-title mb-6">Book Your Table Tonight</h2>
-        <p class="font-accent text-cream-400 mb-10">
+        <div class="gold-divider"></div>
+        <p class="font-display text-cream-500 mb-12 leading-relaxed">
           Reserve your table and let us craft an unforgettable evening for you and your guests.
         </p>
-        <a routerLink="/reservation" class="btn-primary text-base px-12 py-4">
+        <a routerLink="/reservation" class="btn-primary text-sm px-14 py-4">
           Make a Reservation
         </a>
       </div>
@@ -148,25 +219,25 @@ export class HomeComponent implements OnInit {
   settings: Settings | null = null;
 
   featuredDishes = [
-    { name: 'Boeuf Bourguignon', description: 'Beef braised in red wine with mushrooms and pearl onions.', price: '24.00', category: 'Main Course', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80' },
-    { name: 'Crème Brûlée', description: 'Classic vanilla custard with a perfectly caramelized sugar crust.', price: '9.00', category: 'Dessert', image: 'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=600&q=80' },
-    { name: 'Escargots de Bourgogne', description: 'Snails in garlic-herb butter, a true French classic.', price: '12.00', category: 'Starter', image: 'https://images.unsplash.com/photo-1604908177453-7462950a6a3b?w=600&q=80' },
+    { name: 'Boeuf Bourguignon', description: 'Tender beef braised in Burgundy wine with mushrooms, pearl onions and lardons.', price: '24.00', category: 'Main Course', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80' },
+    { name: 'Crème Brûlée', description: 'Classic Madagascan vanilla custard with a perfectly caramelized sugar crust.', price: '9.00', category: 'Dessert', image: 'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=600&q=80' },
+    { name: 'Escargots de Bourgogne', description: 'Snails baked in herbed garlic butter — a true French classic, elevated.', price: '12.00', category: 'Starter', image: 'https://images.unsplash.com/photo-1604908177453-7462950a6a3b?w=600&q=80' },
   ];
 
   stats = [
     { value: '35+', label: 'Years of Excellence' },
     { value: '50k+', label: 'Happy Guests' },
-    { value: '3', label: 'Michelin Stars' },
+    { value: '3',   label: 'Michelin Stars' },
     { value: '120+', label: 'Signature Dishes' },
   ];
 
   galleryImages = [
-    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
+    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
     'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80',
     'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80',
     'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80',
     'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80',
-    'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=600&q=80',
+    'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=80',
     'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=400&q=80',
     'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=80',
   ];
@@ -177,4 +248,3 @@ export class HomeComponent implements OnInit {
     this.api.getSettings().subscribe(s => this.settings = s);
   }
 }
-
