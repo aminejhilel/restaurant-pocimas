@@ -10,7 +10,7 @@ import { Settings } from '../../models';
   imports: [CommonModule, RouterLink],
   styles: [`
     .hero-bg {
-      background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80');
+      background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80');
       background-size: cover;
       background-position: center;
       animation: heroFloat 12s ease-in-out infinite;
@@ -227,7 +227,7 @@ export class HomeComponent implements OnInit {
   stats = [
     { value: '35+', label: 'Years of Excellence' },
     { value: '50k+', label: 'Happy Guests' },
-    { value: '3',   label: 'Michelin Stars' },
+    { value: '3', label: 'Michelin Stars' },
     { value: '120+', label: 'Signature Dishes' },
   ];
 
@@ -242,7 +242,7 @@ export class HomeComponent implements OnInit {
     'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=80',
   ];
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
     this.api.getSettings().subscribe(s => this.settings = s);
