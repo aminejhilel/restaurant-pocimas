@@ -1,0 +1,31 @@
+{
+  "NAV": {
+    "HOME": "Inicio",
+    "STORY": "Nuestra Historia",
+    "OUR_STORY": "Nuestra Historia",
+    "MENU": "Menú",
+    "CONTACT": "Contacto",
+    "LOGIN": "Iniciar Sesión",
+    "MY_RESERVATIONS": "Mis Reservas",
+    "LOGOUT": "Cerrar Sesión",
+    "RESERVE": "Reservar"
+  },
+  "HERO": {
+    "EYEBROW": "Alta Gastronomía · Est. 1987",
+    "TITLE_1": "Pócimas",
+    "TITLE_2": "Restaurante",
+    "SUBTITLE": "Donde el arte culinario se une a la elegancia atemporal. Le espera una experiencia gastronómica inolvidable.",
+    "BTN_RESERVE": "Reservar una Mesa",
+    "BTN_EXPLORE": "Explorar el Menú",
+    "SCROLL": "Desplazarse"
+  },
+  "FOOTER": {
+    "DESC": "Una experiencia de alta cocina donde cada plato cuenta una historia de pasión, tradición y excelencia culinaria.",
+    "QUICK_LINKS": "Navegación",
+    "CONTACT_INFO": "Datos de Contacto",
+    "OPENING_HOURS": "Horario de Apertura",
+    "WEEKDAYS": "Lunes – Viernes",
+    "WEEKENDS": "Sábado – Domingo",
+    "ALL_RIGHTS": "Pócimas Restaurante. Todos los derechos reservados."
+  }
+}

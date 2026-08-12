@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   template: `
     <footer class="bg-dark-900 border-t border-cream-800/20 pt-16 pb-8">
       <div class="max-w-7xl mx-auto px-6">
@@ -12,10 +14,10 @@ import { RouterLink } from '@angular/router';
           <!-- Brand -->
           <div class="col-span-1 lg:col-span-1">
             <div class="flex items-center gap-3 mb-4">
-              <img src="assets/logo.png" alt="Pócimas Restaurante" class="h-12 w-auto object-contain">
+              <img src="assets/logo.png?v=4" alt="Pócimas Restaurante" class="h-20 w-auto object-contain">
             </div>
             <p class="font-accent text-sm text-dark-500 leading-relaxed">
-              A fine dining experience where every dish tells a story of passion, tradition, and culinary excellence.
+              {{ 'FOOTER.DESC' | translate }}
             </p>
             <div class="flex gap-4 mt-6">
               <a href="#" class="w-9 h-9 border border-cream-700/30 flex items-center justify-center hover:border-bronze-400 hover:text-bronze-400 text-dark-500 transition-all duration-300">
@@ -29,23 +31,23 @@ import { RouterLink } from '@angular/router';
 
           <!-- Navigation -->
           <div>
-            <h4 class="font-heading text-lg text-cream-100 mb-6">Navigation</h4>
+            <h4 class="font-heading text-lg text-cream-100 mb-6">{{ 'FOOTER.QUICK_LINKS' | translate }}</h4>
             <ul class="space-y-3">
-              <li><a routerLink="/" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">Home</a></li>
-              <li><a routerLink="/our-story" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">Our Story</a></li>
-              <li><a routerLink="/menu" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">Menu</a></li>
-              <li><a routerLink="/reservation" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">Reservations</a></li>
-              <li><a routerLink="/contact" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">Contact</a></li>
+              <li><a routerLink="/" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">{{ 'NAV.HOME' | translate }}</a></li>
+              <li><a routerLink="/our-story" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">{{ 'NAV.STORY' | translate }}</a></li>
+              <li><a routerLink="/menu" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">{{ 'NAV.MENU' | translate }}</a></li>
+              <li><a routerLink="/reservation" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">{{ 'NAV.RESERVE' | translate }}</a></li>
+              <li><a routerLink="/contact" class="font-accent text-sm text-dark-500 hover:text-bronze-400 transition-colors">{{ 'NAV.CONTACT' | translate }}</a></li>
             </ul>
           </div>
 
           <!-- Opening Hours -->
           <div>
-            <h4 class="font-heading text-lg text-cream-100 mb-6">Opening Hours</h4>
+            <h4 class="font-heading text-lg text-cream-100 mb-6">{{ 'FOOTER.OPENING_HOURS' | translate }}</h4>
             <ul class="space-y-2">
-              <li class="font-accent text-sm text-dark-500">Monday – Friday</li>
+              <li class="font-accent text-sm text-dark-500">{{ 'FOOTER.WEEKDAYS' | translate }}</li>
               <li class="font-accent text-sm text-bronze-400">18:00 – 23:00</li>
-              <li class="font-accent text-sm text-dark-500 mt-3">Saturday – Sunday</li>
+              <li class="font-accent text-sm text-dark-500 mt-3">{{ 'FOOTER.WEEKENDS' | translate }}</li>
               <li class="font-accent text-sm text-bronze-400">17:00 – 23:30</li>
             </ul>
           </div>

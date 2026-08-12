@@ -1,0 +1,31 @@
+{
+  "NAV": {
+    "HOME": "Accueil",
+    "STORY": "Notre Histoire",
+    "OUR_STORY": "Notre Histoire",
+    "MENU": "Menu",
+    "CONTACT": "Contact",
+    "LOGIN": "Connexion",
+    "MY_RESERVATIONS": "Mes Réservations",
+    "LOGOUT": "Déconnexion",
+    "RESERVE": "Réserver"
+  },
+  "HERO": {
+    "EYEBROW": "Haute Gastronomie · Est. 1987",
+    "TITLE_1": "Pócimas",
+    "TITLE_2": "Restaurante",
+    "SUBTITLE": "Où l'art culinaire rencontre l'élégance intemporelle. Une expérience gastronomique inoubliable vous attend.",
+    "BTN_RESERVE": "Réserver une Table",
+    "BTN_EXPLORE": "Explorer le Menu",
+    "SCROLL": "Défiler"
+  },
+  "FOOTER": {
+    "DESC": "Une expérience gastronomique où chaque plat raconte une histoire de passion, de tradition et d'excellence culinaire.",
+    "QUICK_LINKS": "Navigation",
+    "CONTACT_INFO": "Coordonnées",
+    "OPENING_HOURS": "Heures d'Ouverture",
+    "WEEKDAYS": "Lundi – Vendredi",
+    "WEEKENDS": "Samedi – Dimanche",
+    "ALL_RIGHTS": "Pócimas Restaurante. Tous droits réservés."
+  }
+}

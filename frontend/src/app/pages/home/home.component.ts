@@ -1,24 +1,32 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ApiService } from '../../services/api.service';
 import { Settings } from '../../models';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   styles: [`
-    .hero-bg {
-      background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80');
+    /* ── Hero Carousel ── */
+    .hero-slide {
+      position: absolute; inset: 0;
       background-size: cover;
       background-position: center;
-      animation: heroFloat 12s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
-    @keyframes heroFloat {
-      0%, 100% { transform: scale(1.04) translateY(0); }
-      50%       { transform: scale(1.08) translateY(-12px); }
-    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide-1 { background-image: url('/assets/hero-bg.jpg'); }
+    .hero-slide-2 { background-image: url('/assets/hero-bg-2.jpg'); }
+    .hero-slide-3 { background-image: url('/assets/hero-bg-3.jpg'); }
+
+    /* Dot indicators */
+    .carousel-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.4); transition: all 0.4s; cursor:pointer; }
+    .carousel-dot.active { background:#D4AF37; transform:scale(1.3); }
+
     .hero-noise {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       background-repeat: repeat;
@@ -46,50 +54,61 @@ import { Settings } from '../../models';
   template: `
 
     <!-- ═══════════════════════════════════════════ HERO ═══ -->
-    <section class="relative min-h-screen flex items-end overflow-hidden" style="perspective:1200px">
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden" style="perspective:1200px">
 
-      <!-- Background layers -->
-      <div class="absolute inset-0 hero-bg"></div>
+      <!-- Background Carousel Slides -->
+      <div class="hero-slide hero-slide-1" [class.active]="currentSlide === 0"></div>
+      <div class="hero-slide hero-slide-2" [class.active]="currentSlide === 1"></div>
+      <div class="hero-slide hero-slide-3" [class.active]="currentSlide === 2"></div>
+
+      <!-- Noise texture -->
       <div class="absolute inset-0 hero-noise opacity-60"></div>
       <!-- Cinematic dark vignette overlay -->
-      <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.97) 100%);"></div>
-      <!-- Subtle left side dark edge -->
-      <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 50%);"></div>
+      <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.95) 100%);"></div>
 
-      <!-- Hero Content -->
-      <div class="relative z-20 w-full pb-28 md:pb-36 px-6 md:px-16 lg:px-24">
-        <div class="max-w-7xl mx-auto">
+      <!-- Hero Content — CENTERED -->
+      <div class="relative z-20 w-full text-center px-6 md:px-16 lg:px-24">
+        <div class="max-w-4xl mx-auto">
 
           <!-- Eyebrow label -->
-          <div class="flex items-center gap-4 mb-6" style="animation: wordIn 0.6s ease forwards;">
+          <div class="flex items-center justify-center gap-4 mb-6" style="animation: wordIn 0.6s ease forwards;">
             <div class="h-px w-12" style="background: linear-gradient(to right, transparent, #D4AF37);"></div>
-            <p class="font-display text-bronze-400 uppercase tracking-[0.3em] text-xs">Fine Dining · Est. 1987</p>
+            <p class="font-display text-bronze-400 uppercase tracking-[0.3em] text-xs">{{ 'HERO.EYEBROW' | translate }}</p>
+            <div class="h-px w-12" style="background: linear-gradient(to left, transparent, #D4AF37);"></div>
           </div>
 
-          <!-- Main title — word-by-word entrance -->
+          <!-- Main title -->
           <h1 class="font-heading text-white leading-none mb-3" style="font-size: clamp(3.5rem, 10vw, 9rem);">
-            <span class="hero-word" style="animation-delay:0.05s">Pócimas</span>
+            <span class="hero-word" style="animation-delay:0.05s">{{ 'HERO.TITLE_1' | translate }}</span>
           </h1>
           <h1 class="font-heading leading-none mb-8" style="font-size: clamp(3.5rem, 10vw, 9rem); background: linear-gradient(90deg, #835709 0%, #D4AF37 40%, #f0d980 60%, #D4AF37 80%, #835709 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite, wordIn 0.8s 0.1s cubic-bezier(0.16,1,0.3,1) both;">
-            Restaurante
+            {{ 'HERO.TITLE_2' | translate }}
           </h1>
 
-          <p class="font-display text-cream-400 max-w-xl mb-10 leading-relaxed" style="font-size:1.05rem; animation: wordIn 0.8s 0.25s ease both;">
-            Where culinary artistry meets timeless elegance. An unforgettable dining experience awaits.
+          <p class="font-display text-cream-400 max-w-2xl mx-auto mb-10 leading-relaxed" style="font-size:1.05rem; animation: wordIn 0.8s 0.25s ease both;">
+            {{ 'HERO.SUBTITLE' | translate }}
           </p>
 
-          <div class="flex flex-col sm:flex-row gap-4" style="animation: wordIn 0.8s 0.38s ease both;">
-            <a routerLink="/reservation" class="btn-primary">Reserve a Table</a>
-            <a routerLink="/menu" class="btn-outline">Explore Menu</a>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="animation: wordIn 0.8s 0.38s ease both;">
+            <a routerLink="/reservation" class="btn-primary">{{ 'HERO.BTN_RESERVE' | translate }}</a>
+            <a routerLink="/menu" class="btn-outline">{{ 'HERO.BTN_EXPLORE' | translate }}</a>
           </div>
         </div>
       </div>
 
+      <!-- Carousel dot indicators -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+        <span class="carousel-dot" [class.active]="currentSlide === 0" (click)="goToSlide(0)"></span>
+        <span class="carousel-dot" [class.active]="currentSlide === 1" (click)="goToSlide(1)"></span>
+        <span class="carousel-dot" [class.active]="currentSlide === 2" (click)="goToSlide(2)"></span>
+      </div>
+
       <!-- Scroll indicator -->
       <div class="absolute bottom-8 right-12 z-20 flex flex-col items-center gap-3">
-        <p class="font-display text-bronze-400/60 uppercase tracking-[0.2em] text-[10px]" style="writing-mode:vertical-rl">Scroll</p>
+        <p class="font-display text-bronze-400/60 uppercase tracking-[0.2em] text-[10px]" style="writing-mode:vertical-rl">{{ 'HERO.SCROLL' | translate }}</p>
         <div class="scroll-line"></div>
       </div>
+
     </section>
 
     <!-- ═══════════════════════════════════════════ INTRO STRIP ═══ -->
@@ -218,6 +237,23 @@ import { Settings } from '../../models';
 export class HomeComponent implements OnInit {
   settings: Settings | null = null;
 
+  // Carousel state
+  currentSlide = 0;
+  private carouselInterval: any;
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
+    // Reset auto-advance timer when user clicks
+    clearInterval(this.carouselInterval);
+    this.startCarousel();
+  }
+
+  private startCarousel() {
+    this.carouselInterval = setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % 3;
+    }, 5000);
+  }
+
   featuredDishes = [
     { name: 'Boeuf Bourguignon', description: 'Tender beef braised in Burgundy wine with mushrooms, pearl onions and lardons.', price: '24.00', category: 'Main Course', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80' },
     { name: 'Crème Brûlée', description: 'Classic Madagascan vanilla custard with a perfectly caramelized sugar crust.', price: '9.00', category: 'Dessert', image: 'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=600&q=80' },
@@ -246,5 +282,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.api.getSettings().subscribe(s => this.settings = s);
+    this.startCarousel();
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.carouselInterval);
   }
 }

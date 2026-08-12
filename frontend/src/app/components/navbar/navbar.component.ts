@@ -2,11 +2,12 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, TranslateModule],
   template: `
     <nav [class]="'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ' + (scrolled ? 'bg-dark-900/90 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.8)] border-b border-white/5 py-2' : 'bg-transparent py-5')">
       <!-- Animated Gold Bottom Border on Scroll -->
@@ -16,7 +17,7 @@ import { AuthService } from '../../services/auth.service';
         <!-- Logo -->
         <a routerLink="/" class="flex items-center gap-3 group">
           <!-- The user needs to add logo.png to assets -->
-          <img src="assets/logo.png" alt="Pócimas" class="h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-105" (error)="onImgError($event)">
+          <img src="assets/logo.png?v=4" alt="Pócimas" class="h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-105" (error)="onImgError($event)">
           <span *ngIf="imgError" class="font-heading text-2xl text-cream-100 tracking-wider">Pócimas</span>
         </a>
 
@@ -24,42 +25,49 @@ import { AuthService } from '../../services/auth.service';
         <div class="hidden lg:flex items-center gap-10">
           <a routerLink="/" routerLinkActive="text-bronze-400 border-b border-bronze-400" [routerLinkActiveOptions]="{exact:true}"
              class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-bronze-400 transition-all duration-300 py-1 border-b border-transparent">
-            Home
+            {{ 'NAV.HOME' | translate }}
           </a>
           <a routerLink="/our-story" routerLinkActive="text-bronze-400 border-b border-bronze-400"
              class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-bronze-400 transition-all duration-300 py-1 border-b border-transparent">
-            Our Story
+            {{ 'NAV.OUR_STORY' | translate }}
           </a>
           <a routerLink="/menu" routerLinkActive="text-bronze-400 border-b border-bronze-400"
              class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-bronze-400 transition-all duration-300 py-1 border-b border-transparent">
-            Menu
+            {{ 'NAV.MENU' | translate }}
           </a>
           <a routerLink="/contact" routerLinkActive="text-bronze-400 border-b border-bronze-400"
              class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-bronze-400 transition-all duration-300 py-1 border-b border-transparent">
-            Contact
+            {{ 'NAV.CONTACT' | translate }}
           </a>
         </div>
 
-        <!-- Auth + CTA -->
+        <!-- Auth + CTA + Lang -->
         <div class="hidden lg:flex items-center gap-6">
+          <select (change)="changeLanguage($event)" class="bg-transparent text-cream-300 font-display text-[11px] uppercase tracking-[0.1em] border-none outline-none cursor-pointer focus:ring-0">
+            <option value="en" class="bg-dark-900" [selected]="currentLang === 'en'">EN</option>
+            <option value="fr" class="bg-dark-900" [selected]="currentLang === 'fr'">FR</option>
+            <option value="es" class="bg-dark-900" [selected]="currentLang === 'es'">ES</option>
+            <option value="ar" class="bg-dark-900" [selected]="currentLang === 'ar'">عربي</option>
+          </select>
+        
           <ng-container *ngIf="!isLoggedIn">
             <a routerLink="/login"
                class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-bronze-400 transition-colors duration-300">
-              Login
+              {{ 'NAV.LOGIN' | translate }}
             </a>
           </ng-container>
           <ng-container *ngIf="isLoggedIn">
             <a routerLink="/my-reservations"
                class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-bronze-400 transition-colors duration-300">
-              My Reservations
+              {{ 'NAV.MY_RESERVATIONS' | translate }}
             </a>
             <button (click)="logout()"
                class="font-display text-[11px] uppercase tracking-[0.2em] text-cream-300 hover:text-red-400 transition-colors duration-300">
-              Logout
+              {{ 'NAV.LOGOUT' | translate }}
             </button>
           </ng-container>
           <a routerLink="/reservation" class="btn-primary text-[11px] px-7 py-3">
-            Reserve
+            {{ 'NAV.RESERVE' | translate }}
           </a>
         </div>
 
@@ -100,8 +108,14 @@ export class NavbarComponent implements OnInit {
   mobileOpen = false;
   isLoggedIn = false;
   imgError = false;
+  currentLang = 'en';
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private translate: TranslateService) {
+    this.currentLang = this.translate.currentLang || this.translate.getDefaultLang() || 'en';
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit() {
     this.auth.currentUser$.subscribe(user => this.isLoggedIn = !!user || !!localStorage.getItem('token'));
@@ -119,5 +133,9 @@ export class NavbarComponent implements OnInit {
   onImgError(event: any) {
     this.imgError = true;
     event.target.style.display = 'none';
+  }
+  
+  changeLanguage(event: any) {
+    this.translate.use(event.target.value);
   }
 }
