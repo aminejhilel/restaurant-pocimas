@@ -1,7 +1,6 @@
 {
   "NAV": {
     "HOME": "Accueil",
-    "STORY": "Notre Histoire",
     "OUR_STORY": "Notre Histoire",
     "MENU": "Menu",
     "CONTACT": "Contact",
@@ -11,7 +10,7 @@
     "RESERVE": "Réserver"
   },
   "HERO": {
-    "EYEBROW": "Haute Gastronomie · Est. 1987",
+    "EYEBROW": "Haute Gastronomie - Est. 1987",
     "TITLE_1": "Pócimas",
     "TITLE_2": "Restaurante",
     "SUBTITLE": "Où l'art culinaire rencontre l'élégance intemporelle. Une expérience gastronomique inoubliable vous attend.",
@@ -19,13 +18,102 @@
     "BTN_EXPLORE": "Explorer le Menu",
     "SCROLL": "Défiler"
   },
+  "ABOUT": {
+    "SUBTITLE": "Un Goût d'Excellence",
+    "TITLE_1": "Créé avec Passion,",
+    "TITLE_2": "Servi avec Amour",
+    "P1": "Niché au cœur de Paris, Pócimas Restaurante a été un sanctuaire pour ceux qui apprécient les bonnes choses de la vie. Notre cuisine est dirigée par des chefs primés qui transforment les meilleurs ingrédients de saison en chefs-d'œuvre extraordinaires.",
+    "P2": "Chaque repas est un voyage à travers la tradition culinaire française, réimaginée avec une touche contemporaine et présentée avec une attention inébranlable aux détails.",
+    "BTN": "Notre Histoire"
+  },
+  "FEATURED": {
+    "SUBTITLE": "Sélection du Chef",
+    "TITLE": "Plats Signature",
+    "BTN": "Voir le Menu Complet"
+  },
+  "HOME_DISHES": {
+    "DISH1_NAME": "Bœuf Bourguignon",
+    "DISH1_DESC": "Bœuf tendre braisé au vin de Bourgogne avec champignons, petits oignons et lardons.",
+    "DISH1_CAT": "Plat Principal",
+    "DISH2_NAME": "Crème Brûlée",
+    "DISH2_DESC": "Crème pâtissière classique à la vanille de Madagascar avec une croûte de sucre parfaitement caramélisée.",
+    "DISH2_CAT": "Dessert",
+    "DISH3_NAME": "Escargots de Bourgogne",
+    "DISH3_DESC": "Escargots cuits au beurre d'ail aux herbes — un grand classique français.",
+    "DISH3_CAT": "Entrée"
+  },
+  "HOME_STATS": {
+    "STAT1": "Années d'Excellence",
+    "STAT2": "Clients Satisfaits",
+    "STAT3": "Étoiles Michelin",
+    "STAT4": "Plats Signature"
+  },
+  "GALLERY": {
+    "SUBTITLE": "Moments",
+    "TITLE": "Un Aperçu à l'Intérieur"
+  },
+  "CTA": {
+    "SUBTITLE": "Expérience Gastronomique",
+    "TITLE": "Réservez Votre Table Ce Soir",
+    "TEXT": "Réservez votre table et laissez-nous créer une soirée inoubliable pour vous et vos invités.",
+    "BTN": "Faire une Réservation"
+  },
   "FOOTER": {
     "DESC": "Une expérience gastronomique où chaque plat raconte une histoire de passion, de tradition et d'excellence culinaire.",
     "QUICK_LINKS": "Navigation",
-    "CONTACT_INFO": "Coordonnées",
+    "CONTACT_INFO": "Contact",
     "OPENING_HOURS": "Heures d'Ouverture",
-    "WEEKDAYS": "Lundi – Vendredi",
-    "WEEKENDS": "Samedi – Dimanche",
+    "WEEKDAYS": "Lundi - Vendredi",
+    "WEEKENDS": "Samedi - Dimanche",
     "ALL_RIGHTS": "Pócimas Restaurante. Tous droits réservés."
+  },
+  "STORY": {
+    "SUBTITLE": "Héritage & Passion",
+    "TITLE": "Notre Histoire",
+    "CH1_TITLE": "Le Début",
+    "CH1_P1": "Fondé en 1987 par le Chef Antoine Laurent, Pócimas Restaurante a commencé comme un petit bistrot au cœur de Paris. La vision d'Antoine était simple : servir une cuisine française authentique en utilisant uniquement les ingrédients les plus frais des marchés locaux.",
+    "CH1_P2": "Le bouche-à-oreille s'est rapidement répandu sur la qualité exceptionnelle et la chaleur du service, transformant le modeste établissement en un joyau local bien-aimé.",
+    "CH2_TITLE": "Notre Philosophie",
+    "CH2_P1": "Nous croyons que la grande cuisine commence par de grands ingrédients. C'est pourquoi nous collaborons étroitement avec des agriculteurs, artisans et viticulteurs locaux qui partagent notre engagement envers la durabilité et l'excellence.",
+    "CH2_P2": "Chaque plat est un témoignage des saisons, changeant dynamiquement pour refléter ce que la nature offre de meilleur.",
+    "CH3_TITLE": "L'Avenir",
+    "CH3_P1": "Aujourd'hui, Pócimas Restaurante est honoré de trois étoiles Michelin, pourtant nos valeurs fondamentales restent inchangées. Nous continuons à repousser les limites de la gastronomie tout en honorant les riches traditions qui nous ont amenés ici.",
+    "CH3_P2": "Nous vous invitons à vous joindre à nous dans ce voyage culinaire continu, où chaque repas est conçu pour être une expérience mémorable."
+  },
+  "MENU": {
+    "SUBTITLE": "Voyage Culinaire",
+    "TITLE": "Notre Menu",
+    "DESC": "Préparé avec les meilleurs ingrédients de saison, notre menu est une célébration de la tradition culinaire française.",
+    "ALL": "Tout",
+    "UNAVAILABLE": "Indisponible",
+    "EMPTY": "Aucun article trouvé."
+  },
+  "CONTACT": {
+    "SUBTITLE": "Nous Contacter",
+    "TITLE": "Contactez-nous",
+    "VISIT": "Visitez-nous",
+    "ADDRESS": "Adresse",
+    "PHONE": "Téléphone",
+    "EMAIL": "Email",
+    "HOURS": "Horaires",
+    "HOURS_VAL": "Lundi – Dimanche",
+    "FORM_TITLE": "Envoyer un Message",
+    "FORM_SUB": "Nous vous répondrons dans les 24 heures.",
+    "SUCCESS": "✓ Votre message a été envoyé. Nous vous contacterons bientôt !",
+    "NAME": "Nom Complet *",
+    "NAME_PH": "Jean Dupont",
+    "NAME_REQ": "Le nom est requis",
+    "EMAIL_LABEL": "Email *",
+    "EMAIL_REQ": "L'email est requis",
+    "PHONE_LABEL": "Téléphone",
+    "MESSAGE": "Message *",
+    "MESSAGE_PH": "Comment pouvons-nous vous aider ?",
+    "MESSAGE_REQ": "Le message est requis",
+    "SEND": "Envoyer le Message",
+    "SENDING": "Envoi en cours..."
+  },
+  "SEO": {
+    "TITLE": "Pócimas Restaurante | Haute Gastronomie",
+    "DESCRIPTION": "Expérimentez la haute gastronomie au Pócimas Restaurante."
   }
 }

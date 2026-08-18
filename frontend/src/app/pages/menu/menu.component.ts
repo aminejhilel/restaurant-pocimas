@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { ApiService } from '../../services/api.service';
 import { MenuCategory } from '../../models';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <!-- Page Header -->
     <div class="relative pt-32 pb-16 px-6 overflow-hidden">
       <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80')] bg-cover bg-center opacity-10"></div>
       <div class="relative text-center max-w-2xl mx-auto">
-        <p class="section-subtitle">Culinary Journey</p>
-        <h1 class="section-title text-5xl md:text-7xl">Our Menu</h1>
+        <p class="section-subtitle">{{ 'MENU.SUBTITLE' | translate }}</p>
+        <h1 class="section-title text-5xl md:text-7xl">{{ 'MENU.TITLE' | translate }}</h1>
         <div class="gold-divider w-24 mx-auto"></div>
-        <p class="font-accent text-cream-400">Crafted with the finest seasonal ingredients, our menu is a celebration of French culinary tradition.</p>
+        <p class="font-accent text-cream-400">{{ 'MENU.DESC' | translate }}</p>
       </div>
     </div>
 
@@ -30,7 +31,7 @@ import { MenuCategory } from '../../models';
         <div class="flex flex-wrap gap-3 justify-center">
           <button (click)="selectedCategory = null"
                   [class]="'font-accent text-sm uppercase tracking-widest px-6 py-2 transition-all duration-300 ' + (!selectedCategory ? 'bg-gold-gradient text-dark-900 font-semibold' : 'border border-cream-700/30 text-cream-400 hover:border-bronze-400 hover:text-bronze-400')">
-            All
+            {{ 'MENU.ALL' | translate }}
           </button>
           <button *ngFor="let cat of categories" (click)="selectedCategory = cat.id"
                   [class]="'font-accent text-sm uppercase tracking-widest px-6 py-2 transition-all duration-300 ' + (selectedCategory === cat.id ? 'bg-gold-gradient text-dark-900 font-semibold' : 'border border-cream-700/30 text-cream-400 hover:border-bronze-400 hover:text-bronze-400')">
@@ -69,7 +70,7 @@ import { MenuCategory } from '../../models';
                 <p class="font-accent text-sm text-dark-500 leading-relaxed flex-1">{{ item.description }}</p>
                 <div *ngIf="!item.available" class="mt-3">
                   <span class="font-accent text-xs bg-red-500/10 border border-red-500/30 text-red-400 px-3 py-1 rounded-full">
-                    Unavailable
+                    {{ 'MENU.UNAVAILABLE' | translate }}
                   </span>
                 </div>
               </div>
@@ -79,7 +80,7 @@ import { MenuCategory } from '../../models';
 
         <!-- Empty state -->
         <div *ngIf="filteredCategories.length === 0" class="text-center py-24 text-dark-500">
-          <p class="font-accent text-lg">No items found.</p>
+          <p class="font-accent text-lg">{{ 'MENU.EMPTY' | translate }}</p>
         </div>
       </div>
     </div>

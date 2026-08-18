@@ -20,8 +20,8 @@ import { Settings } from '../../models';
     }
     .hero-slide.active { opacity: 1; }
     .hero-slide-1 { background-image: url('/assets/hero-bg.jpg'); }
-    .hero-slide-2 { background-image: url('/assets/hero-bg-2.jpg'); }
-    .hero-slide-3 { background-image: url('/assets/hero-bg-3.jpg'); }
+    .hero-slide-2 { background-image: url('/assets/new-slider-1.jpg'); }
+    .hero-slide-3 { background-image: url('/assets/new-slider-2.jpg'); }
 
     /* Dot indicators */
     .carousel-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.4); transition: all 0.4s; cursor:pointer; }
@@ -96,6 +96,8 @@ import { Settings } from '../../models';
         </div>
       </div>
 
+
+
       <!-- Carousel dot indicators -->
       <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
         <span class="carousel-dot" [class.active]="currentSlide === 0" (click)="goToSlide(0)"></span>
@@ -114,9 +116,9 @@ import { Settings } from '../../models';
     <!-- ═══════════════════════════════════════════ INTRO STRIP ═══ -->
     <div class="py-12 border-y overflow-hidden" style="border-color: rgba(212,175,55,0.12); background: linear-gradient(90deg, #000 0%, #080808 50%, #000 100%);">
       <div class="flex gap-16 items-center justify-center flex-wrap px-8">
-        <div *ngFor="let stat of stats" class="stat-card text-center group cursor-default">
+        <div *ngFor="let stat of stats; let i = index" class="stat-card text-center group cursor-default">
           <div class="stat-value font-heading text-5xl text-gradient mb-1 transition-all duration-300">{{ stat.value }}</div>
-          <div class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">{{ stat.label }}</div>
+          <div class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">{{ 'HOME_STATS.STAT' + (i+1) | translate }}</div>
         </div>
       </div>
     </div>
@@ -126,18 +128,17 @@ import { Settings } from '../../models';
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <!-- Text -->
         <div>
-          <p class="section-subtitle">A Taste of Excellence</p>
-          <h2 class="section-title mb-2">Crafted With Passion,</h2>
-          <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mb-4" style="-webkit-text-fill-color: transparent; background: linear-gradient(90deg, #835709 0%, #D4AF37 40%, #f0d980 60%, #D4AF37 80%, #835709 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; animation: shimmer 4s linear infinite;">Served With Love</h2>
+          <p class="section-subtitle">{{ 'ABOUT.SUBTITLE' | translate }}</p>
+          <h2 class="section-title mb-2">{{ 'ABOUT.TITLE_1' | translate }}</h2>
+          <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl mb-4" style="-webkit-text-fill-color: transparent; background: linear-gradient(90deg, #835709 0%, #D4AF37 40%, #f0d980 60%, #D4AF37 80%, #835709 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; animation: shimmer 4s linear infinite;">{{ 'ABOUT.TITLE_2' | translate }}</h2>
           <div class="gold-divider" style="margin-left:0; margin-right:auto;"></div>
           <p class="font-display text-cream-400 leading-relaxed mb-5" style="font-size:0.95rem;">
-            Nestled in the heart of Paris, Pócimas Restaurante has been a sanctuary for those who appreciate the finer things in life.
-            Our kitchen is led by award-winning chefs who transform the finest seasonal ingredients into extraordinary masterpieces.
+            {{ 'ABOUT.P1' | translate }}
           </p>
           <p class="font-display text-cream-500 leading-relaxed mb-10" style="font-size:0.95rem;">
-            Every meal is a journey through French culinary tradition, reimagined with contemporary flair and presented with unwavering attention to detail.
+            {{ 'ABOUT.P2' | translate }}
           </p>
-          <a routerLink="/our-story" class="btn-outline">Our Story</a>
+          <a routerLink="/our-story" class="btn-outline">{{ 'ABOUT.BTN' | translate }}</a>
         </div>
         <!-- Asymmetric photo grid -->
         <div class="grid grid-cols-2 gap-3 h-[500px]">
@@ -161,8 +162,8 @@ import { Settings } from '../../models';
     <section class="py-28 px-6" style="background: linear-gradient(180deg, #000 0%, #060606 50%, #000 100%);">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-20">
-          <p class="section-subtitle">Chef's Selection</p>
-          <h2 class="section-title">Featured Dishes</h2>
+          <p class="section-subtitle">{{ 'FEATURED.SUBTITLE' | translate }}</p>
+          <h2 class="section-title">{{ 'FEATURED.TITLE' | translate }}</h2>
           <div class="gold-divider"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -170,16 +171,16 @@ import { Settings } from '../../models';
                class="dish-card card-glass overflow-hidden group cursor-default"
                [style.animation-delay]="(i * 0.12) + 's'">
             <div class="relative aspect-[4/3] overflow-hidden">
-              <img [src]="dish.image" [alt]="dish.name"
+              <img [src]="dish.image" [alt]="'HOME_DISHES.DISH' + (i+1) + '_NAME' | translate"
                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
               <!-- Category badge -->
               <div class="absolute top-3 left-3 px-3 py-1" style="background: rgba(0,0,0,0.7); border: 1px solid rgba(212,175,55,0.3);">
-                <span class="font-display text-[10px] text-bronze-400 uppercase tracking-widest">{{ dish.category }}</span>
+                <span class="font-display text-[10px] text-bronze-400 uppercase tracking-widest">{{ 'HOME_DISHES.DISH' + (i+1) + '_CAT' | translate }}</span>
               </div>
             </div>
             <div class="p-7">
-              <h3 class="font-heading text-2xl text-cream-100 mb-3">{{ dish.name }}</h3>
-              <p class="font-display text-sm text-cream-500 leading-relaxed mb-5">{{ dish.description }}</p>
+              <h3 class="font-heading text-2xl text-cream-100 mb-3">{{ 'HOME_DISHES.DISH' + (i+1) + '_NAME' | translate }}</h3>
+              <p class="font-display text-sm text-cream-500 leading-relaxed mb-5">{{ 'HOME_DISHES.DISH' + (i+1) + '_DESC' | translate }}</p>
               <div class="flex items-center justify-between">
                 <span class="font-display font-semibold text-bronze-400 text-xl">€{{ dish.price }}</span>
                 <div class="h-px flex-1 mx-4" style="background: linear-gradient(to right, rgba(212,175,55,0.2), transparent);"></div>
@@ -188,7 +189,7 @@ import { Settings } from '../../models';
           </div>
         </div>
         <div class="text-center mt-16">
-          <a routerLink="/menu" class="btn-outline">View Full Menu</a>
+          <a routerLink="/menu" class="btn-outline">{{ 'FEATURED.BTN' | translate }}</a>
         </div>
       </div>
     </section>
@@ -197,8 +198,8 @@ import { Settings } from '../../models';
     <section class="py-28 px-6">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-20">
-          <p class="section-subtitle">Moments</p>
-          <h2 class="section-title">A Glimpse Inside</h2>
+          <p class="section-subtitle">{{ 'GALLERY.SUBTITLE' | translate }}</p>
+          <h2 class="section-title">{{ 'GALLERY.TITLE' | translate }}</h2>
           <div class="gold-divider"></div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
@@ -221,14 +222,14 @@ import { Settings } from '../../models';
         <div style="width:600px; height:600px; background: radial-gradient(ellipse, rgba(212,175,55,0.07) 0%, transparent 70%);"></div>
       </div>
       <div class="relative z-10 text-center max-w-2xl mx-auto">
-        <p class="section-subtitle">Experience Fine Dining</p>
-        <h2 class="section-title mb-6">Book Your Table Tonight</h2>
+        <p class="section-subtitle">{{ 'CTA.SUBTITLE' | translate }}</p>
+        <h2 class="section-title mb-6">{{ 'CTA.TITLE' | translate }}</h2>
         <div class="gold-divider"></div>
         <p class="font-display text-cream-500 mb-12 leading-relaxed">
-          Reserve your table and let us craft an unforgettable evening for you and your guests.
+          {{ 'CTA.TEXT' | translate }}
         </p>
         <a routerLink="/reservation" class="btn-primary text-sm px-14 py-4">
-          Make a Reservation
+          {{ 'CTA.BTN' | translate }}
         </a>
       </div>
     </section>
@@ -243,7 +244,6 @@ export class HomeComponent implements OnInit {
 
   goToSlide(index: number) {
     this.currentSlide = index;
-    // Reset auto-advance timer when user clicks
     clearInterval(this.carouselInterval);
     this.startCarousel();
   }
@@ -253,7 +253,6 @@ export class HomeComponent implements OnInit {
       this.currentSlide = (this.currentSlide + 1) % 3;
     }, 5000);
   }
-
   featuredDishes = [
     { name: 'Boeuf Bourguignon', description: 'Tender beef braised in Burgundy wine with mushrooms, pearl onions and lardons.', price: '24.00', category: 'Main Course', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80' },
     { name: 'Crème Brûlée', description: 'Classic Madagascan vanilla custard with a perfectly caramelized sugar crust.', price: '9.00', category: 'Dessert', image: 'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=600&q=80' },

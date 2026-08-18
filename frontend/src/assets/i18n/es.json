@@ -1,7 +1,6 @@
 {
   "NAV": {
     "HOME": "Inicio",
-    "STORY": "Nuestra Historia",
     "OUR_STORY": "Nuestra Historia",
     "MENU": "Menú",
     "CONTACT": "Contacto",
@@ -11,7 +10,7 @@
     "RESERVE": "Reservar"
   },
   "HERO": {
-    "EYEBROW": "Alta Gastronomía · Est. 1987",
+    "EYEBROW": "Alta Gastronomía - Est. 1987",
     "TITLE_1": "Pócimas",
     "TITLE_2": "Restaurante",
     "SUBTITLE": "Donde el arte culinario se une a la elegancia atemporal. Le espera una experiencia gastronómica inolvidable.",
@@ -19,13 +18,102 @@
     "BTN_EXPLORE": "Explorar el Menú",
     "SCROLL": "Desplazarse"
   },
+  "ABOUT": {
+    "SUBTITLE": "Un Sabor de Excelencia",
+    "TITLE_1": "Elaborado con Pasión,",
+    "TITLE_2": "Servido con Amor",
+    "P1": "Ubicado en el corazón de París, Pócimas Restaurante ha sido un santuario para aquellos que aprecian las cosas buenas de la vida. Nuestra cocina está dirigida por chefs galardonados que transforman los mejores ingredientes de temporada en extraordinarias obras maestras.",
+    "P2": "Cada comida es un viaje por la tradición culinaria francesa, reimaginada con un estilo contemporáneo y presentada con una atención inquebrantable a los detalles.",
+    "BTN": "Nuestra Historia"
+  },
+  "FEATURED": {
+    "SUBTITLE": "Selección del Chef",
+    "TITLE": "Platos Destacados",
+    "BTN": "Ver Menú Completo"
+  },
+  "HOME_DISHES": {
+    "DISH1_NAME": "Boeuf Bourguignon",
+    "DISH1_DESC": "Ternera tierna estofada en vino de Borgoña con champiñones, cebollitas y panceta.",
+    "DISH1_CAT": "Plato Principal",
+    "DISH2_NAME": "Crème Brûlée",
+    "DISH2_DESC": "Clásica crema de vainilla de Madagascar con una costra de azúcar perfectamente caramelizada.",
+    "DISH2_CAT": "Postre",
+    "DISH3_NAME": "Escargots de Bourgogne",
+    "DISH3_DESC": "Caracoles horneados en mantequilla de ajo a las finas hierbas, un clásico francés elevado.",
+    "DISH3_CAT": "Entrante"
+  },
+  "HOME_STATS": {
+    "STAT1": "Años de Excelencia",
+    "STAT2": "Huéspedes Felices",
+    "STAT3": "Estrellas Michelin",
+    "STAT4": "Platos de Autor"
+  },
+  "GALLERY": {
+    "SUBTITLE": "Momentos",
+    "TITLE": "Un Vistazo al Interior"
+  },
+  "CTA": {
+    "SUBTITLE": "Experimente la Alta Cocina",
+    "TITLE": "Reserve su Mesa Esta Noche",
+    "TEXT": "Reserve su mesa y permítanos crear una velada inolvidable para usted y sus invitados.",
+    "BTN": "Hacer una Reserva"
+  },
   "FOOTER": {
     "DESC": "Una experiencia de alta cocina donde cada plato cuenta una historia de pasión, tradición y excelencia culinaria.",
     "QUICK_LINKS": "Navegación",
     "CONTACT_INFO": "Datos de Contacto",
     "OPENING_HOURS": "Horario de Apertura",
-    "WEEKDAYS": "Lunes – Viernes",
-    "WEEKENDS": "Sábado – Domingo",
+    "WEEKDAYS": "Lunes - Viernes",
+    "WEEKENDS": "Sábado - Domingo",
     "ALL_RIGHTS": "Pócimas Restaurante. Todos los derechos reservados."
+  },
+  "STORY": {
+    "SUBTITLE": "Herencia y Pasión",
+    "TITLE": "Nuestra Historia",
+    "CH1_TITLE": "El Comienzo",
+    "CH1_P1": "Fundado en 1987 por el Chef Antoine Laurent, Pócimas Restaurante comenzó como un pequeño bistró en el corazón de París. La visión de Antoine era simple: servir auténtica cocina francesa utilizando solo los ingredientes más frescos de los mercados locales.",
+    "CH1_P2": "Rápidamente se corrió la voz sobre la calidad excepcional y la calidez del servicio, convirtiendo el modesto establecimiento en una joya local muy querida.",
+    "CH2_TITLE": "Nuestra Filosofía",
+    "CH2_P1": "Creemos que la gran comida comienza con grandes ingredientes. Por eso colaboramos estrechamente con agricultores, artesanos y viticultores locales que comparten nuestro compromiso con la sostenibilidad y la excelencia.",
+    "CH2_P2": "Cada plato es un testimonio de las estaciones, cambiando dinámicamente para reflejar lo que la naturaleza ofrece en su punto más alto.",
+    "CH3_TITLE": "El Futuro",
+    "CH3_P1": "Hoy, Pócimas Restaurante es honrado con tres estrellas Michelin, sin embargo, nuestros valores fundamentales permanecen inalterados. Continuamos empujando los límites de la gastronomía mientras honramos las ricas tradiciones que nos trajeron aquí.",
+    "CH3_P2": "Le invitamos a unirse a nosotros en este viaje culinario continuo, donde cada comida está diseñada para ser una experiencia memorable."
+  },
+  "MENU": {
+    "SUBTITLE": "Viaje Culinario",
+    "TITLE": "Nuestro Menú",
+    "DESC": "Elaborado con los mejores ingredientes de temporada, nuestro menú es una celebración de la tradición culinaria francesa.",
+    "ALL": "Todo",
+    "UNAVAILABLE": "No disponible",
+    "EMPTY": "No se encontraron artículos."
+  },
+  "CONTACT": {
+    "SUBTITLE": "Póngase en Contacto",
+    "TITLE": "Contáctenos",
+    "VISIT": "Visítenos",
+    "ADDRESS": "Dirección",
+    "PHONE": "Teléfono",
+    "EMAIL": "Correo",
+    "HOURS": "Horario",
+    "HOURS_VAL": "Lunes – Domingo",
+    "FORM_TITLE": "Enviar un Mensaje",
+    "FORM_SUB": "Le responderemos en 24 horas.",
+    "SUCCESS": "✓ Su mensaje ha sido enviado. ¡Nos pondremos en contacto pronto!",
+    "NAME": "Nombre Completo *",
+    "NAME_PH": "Juan García",
+    "NAME_REQ": "El nombre es obligatorio",
+    "EMAIL_LABEL": "Correo Electrónico *",
+    "EMAIL_REQ": "El correo es obligatorio",
+    "PHONE_LABEL": "Teléfono",
+    "MESSAGE": "Mensaje *",
+    "MESSAGE_PH": "¿Cómo podemos ayudarle?",
+    "MESSAGE_REQ": "El mensaje es obligatorio",
+    "SEND": "Enviar Mensaje",
+    "SENDING": "Enviando..."
+  },
+  "SEO": {
+    "TITLE": "Pócimas Restaurante | Alta Gastronomía",
+    "DESCRIPTION": "Experimente la alta gastronomía en Pócimas Restaurante."
   }
 }

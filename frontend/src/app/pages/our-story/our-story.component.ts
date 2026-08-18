@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-our-story',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <!-- Header -->
     <div class="relative pt-32 pb-16 px-6">
       <div class="text-center max-w-2xl mx-auto">
-        <p class="section-subtitle">Heritage & Passion</p>
-        <h1 class="section-title text-5xl md:text-7xl">Our Story</h1>
+        <p class="section-subtitle">{{ 'STORY.SUBTITLE' | translate }}</p>
+        <h1 class="section-title text-5xl md:text-7xl">{{ 'STORY.TITLE' | translate }}</h1>
         <div class="gold-divider w-24 mx-auto"></div>
       </div>
     </div>
@@ -22,12 +23,12 @@ import { CommonModule } from '@angular/common';
         <!-- Chapter 1 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div class="order-2 md:order-1">
-            <h2 class="font-heading text-3xl text-cream-100 mb-6">The Beginning</h2>
+            <h2 class="font-heading text-3xl text-cream-100 mb-6">{{ 'STORY.CH1_TITLE' | translate }}</h2>
             <p class="font-accent text-cream-400 leading-relaxed mb-4">
-              Founded in 1987 by Chef Antoine Laurent, Pócimas Restaurante began as a small bistro in the heart of Paris. Antoine's vision was simple: to serve authentic French cuisine using only the freshest ingredients from local markets.
+              {{ 'STORY.CH1_P1' | translate }}
             </p>
             <p class="font-accent text-cream-400 leading-relaxed">
-              Word quickly spread about the exceptional quality and warmth of the service, turning the modest establishment into a beloved local gem.
+              {{ 'STORY.CH1_P2' | translate }}
             </p>
           </div>
           <div class="order-1 md:order-2 aspect-square overflow-hidden card-glass p-2">
@@ -41,12 +42,12 @@ import { CommonModule } from '@angular/common';
             <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Ingredients" class="w-full h-full object-cover">
           </div>
           <div>
-            <h2 class="font-heading text-3xl text-cream-100 mb-6">Our Philosophy</h2>
+            <h2 class="font-heading text-3xl text-cream-100 mb-6">{{ 'STORY.CH2_TITLE' | translate }}</h2>
             <p class="font-accent text-cream-400 leading-relaxed mb-4">
-              We believe that great food starts with great ingredients. That's why we partner closely with local farmers, artisans, and winemakers who share our commitment to sustainability and excellence.
+              {{ 'STORY.CH2_P1' | translate }}
             </p>
             <p class="font-accent text-cream-400 leading-relaxed">
-              Every dish is a testament to the seasons, changing dynamically to reflect what nature offers at its absolute peak.
+              {{ 'STORY.CH2_P2' | translate }}
             </p>
           </div>
         </div>
@@ -54,12 +55,12 @@ import { CommonModule } from '@angular/common';
         <!-- Chapter 3 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div class="order-2 md:order-1">
-            <h2 class="font-heading text-3xl text-cream-100 mb-6">The Future</h2>
+            <h2 class="font-heading text-3xl text-cream-100 mb-6">{{ 'STORY.CH3_TITLE' | translate }}</h2>
             <p class="font-accent text-cream-400 leading-relaxed mb-4">
-              Today, Pócimas Restaurante is honored with three Michelin stars, yet our core values remain unchanged. We continue to push the boundaries of gastronomy while honoring the rich traditions that got us here.
+              {{ 'STORY.CH3_P1' | translate }}
             </p>
             <p class="font-accent text-cream-400 leading-relaxed">
-              We invite you to join us on this ongoing culinary journey, where every meal is designed to be a memorable experience.
+              {{ 'STORY.CH3_P2' | translate }}
             </p>
           </div>
           <div class="order-1 md:order-2 aspect-[4/3] overflow-hidden card-glass p-2">

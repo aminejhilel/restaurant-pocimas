@@ -1,7 +1,6 @@
 {
   "NAV": {
     "HOME": "Home",
-    "STORY": "Our Story",
     "OUR_STORY": "Our Story",
     "MENU": "Menu",
     "CONTACT": "Contact",
@@ -11,21 +10,110 @@
     "RESERVE": "Reserve"
   },
   "HERO": {
-    "EYEBROW": "Fine Dining · Est. 1987",
+    "EYEBROW": "Haute Gastronomy - Est. 1987",
     "TITLE_1": "Pócimas",
     "TITLE_2": "Restaurante",
-    "SUBTITLE": "Where culinary artistry meets timeless elegance. An unforgettable dining experience awaits.",
+    "SUBTITLE": "Where culinary art meets timeless elegance. An unforgettable gastronomic experience awaits you.",
     "BTN_RESERVE": "Reserve a Table",
     "BTN_EXPLORE": "Explore Menu",
     "SCROLL": "Scroll"
   },
+  "ABOUT": {
+    "SUBTITLE": "A Taste of Excellence",
+    "TITLE_1": "Crafted With Passion,",
+    "TITLE_2": "Served With Love",
+    "P1": "Nestled in the heart of Paris, Pócimas Restaurante has been a sanctuary for those who appreciate the finer things in life. Our kitchen is led by award-winning chefs who transform the finest seasonal ingredients into extraordinary masterpieces.",
+    "P2": "Every meal is a journey through French culinary tradition, reimagined with contemporary flair and presented with unwavering attention to detail.",
+    "BTN": "Our Story"
+  },
+  "FEATURED": {
+    "SUBTITLE": "Chef's Selection",
+    "TITLE": "Featured Dishes",
+    "BTN": "View Full Menu"
+  },
+  "HOME_DISHES": {
+    "DISH1_NAME": "Boeuf Bourguignon",
+    "DISH1_DESC": "Tender beef braised in Burgundy wine with mushrooms, pearl onions and lardons.",
+    "DISH1_CAT": "Main Course",
+    "DISH2_NAME": "Crème Brûlée",
+    "DISH2_DESC": "Classic Madagascan vanilla custard with a perfectly caramelized sugar crust.",
+    "DISH2_CAT": "Dessert",
+    "DISH3_NAME": "Escargots de Bourgogne",
+    "DISH3_DESC": "Snails baked in herbed garlic butter — a true French classic, elevated.",
+    "DISH3_CAT": "Starter"
+  },
+  "HOME_STATS": {
+    "STAT1": "Years of Excellence",
+    "STAT2": "Happy Guests",
+    "STAT3": "Michelin Stars",
+    "STAT4": "Signature Dishes"
+  },
+  "GALLERY": {
+    "SUBTITLE": "Moments",
+    "TITLE": "A Glimpse Inside"
+  },
+  "CTA": {
+    "SUBTITLE": "Experience Fine Dining",
+    "TITLE": "Book Your Table Tonight",
+    "TEXT": "Reserve your table and let us craft an unforgettable evening for you and your guests.",
+    "BTN": "Make a Reservation"
+  },
   "FOOTER": {
     "DESC": "A fine dining experience where every dish tells a story of passion, tradition, and culinary excellence.",
-    "QUICK_LINKS": "Navigation",
+    "QUICK_LINKS": "Quick Links",
     "CONTACT_INFO": "Contact Info",
     "OPENING_HOURS": "Opening Hours",
-    "WEEKDAYS": "Monday – Friday",
-    "WEEKENDS": "Saturday – Sunday",
+    "WEEKDAYS": "Monday - Friday",
+    "WEEKENDS": "Saturday - Sunday",
     "ALL_RIGHTS": "Pócimas Restaurante. All rights reserved."
+  },
+  "STORY": {
+    "SUBTITLE": "Heritage & Passion",
+    "TITLE": "Our Story",
+    "CH1_TITLE": "The Beginning",
+    "CH1_P1": "Founded in 1987 by Chef Antoine Laurent, Pócimas Restaurante began as a small bistro in the heart of Paris. Antoine's vision was simple: to serve authentic French cuisine using only the freshest ingredients from local markets.",
+    "CH1_P2": "Word quickly spread about the exceptional quality and warmth of the service, turning the modest establishment into a beloved local gem.",
+    "CH2_TITLE": "Our Philosophy",
+    "CH2_P1": "We believe that great food starts with great ingredients. That's why we partner closely with local farmers, artisans, and winemakers who share our commitment to sustainability and excellence.",
+    "CH2_P2": "Every dish is a testament to the seasons, changing dynamically to reflect what nature offers at its absolute peak.",
+    "CH3_TITLE": "The Future",
+    "CH3_P1": "Today, Pócimas Restaurante is honored with three Michelin stars, yet our core values remain unchanged. We continue to push the boundaries of gastronomy while honoring the rich traditions that got us here.",
+    "CH3_P2": "We invite you to join us on this ongoing culinary journey, where every meal is designed to be a memorable experience."
+  },
+  "MENU": {
+    "SUBTITLE": "Culinary Journey",
+    "TITLE": "Our Menu",
+    "DESC": "Crafted with the finest seasonal ingredients, our menu is a celebration of French culinary tradition.",
+    "ALL": "All",
+    "UNAVAILABLE": "Unavailable",
+    "EMPTY": "No items found."
+  },
+  "CONTACT": {
+    "SUBTITLE": "Get in Touch",
+    "TITLE": "Contact Us",
+    "VISIT": "Visit Us",
+    "ADDRESS": "Address",
+    "PHONE": "Phone",
+    "EMAIL": "Email",
+    "HOURS": "Hours",
+    "HOURS_VAL": "Monday – Sunday",
+    "FORM_TITLE": "Send a Message",
+    "FORM_SUB": "We'll get back to you within 24 hours.",
+    "SUCCESS": "✓ Your message has been sent. We'll be in touch shortly!",
+    "NAME": "Full Name *",
+    "NAME_PH": "John Doe",
+    "NAME_REQ": "Name is required",
+    "EMAIL_LABEL": "Email *",
+    "EMAIL_REQ": "Email is required",
+    "PHONE_LABEL": "Phone",
+    "MESSAGE": "Message *",
+    "MESSAGE_PH": "How can we help you?",
+    "MESSAGE_REQ": "Message is required",
+    "SEND": "Send Message",
+    "SENDING": "Sending..."
+  },
+  "SEO": {
+    "TITLE": "Pócimas Restaurante | Fine Dining",
+    "DESCRIPTION": "Experience fine dining at Pócimas Restaurante."
   }
 }
