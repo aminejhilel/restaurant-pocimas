@@ -44,11 +44,31 @@ import { TranslateModule } from '@ngx-translate/core';
             <!-- Opening Hours -->
             <div>
               <h4 class="font-heading text-base text-cream-100 mb-6 tracking-wide">{{ 'FOOTER.OPENING_HOURS' | translate }}</h4>
-              <ul class="space-y-3">
-                <li class="font-accent text-sm" style="color:rgba(180,165,140,0.5);">{{ 'FOOTER.WEEKDAYS' | translate }}</li>
-                <li class="font-accent text-sm text-bronze-400">18:00 – 23:00</li>
-                <li class="font-accent text-sm mt-4" style="color:rgba(180,165,140,0.5);">{{ 'FOOTER.WEEKENDS' | translate }}</li>
-                <li class="font-accent text-sm text-bronze-400">17:00 – 23:30</li>
+              <ul class="space-y-2">
+                <li class="flex justify-between gap-4">
+                  <span class="font-accent text-xs" style="color:rgba(180,165,140,0.5);">Mié – Jue</span>
+                  <span class="font-accent text-xs text-bronze-400">12:30–16:00 · 20:00–00:00</span>
+                </li>
+                <li class="flex justify-between gap-4">
+                  <span class="font-accent text-xs" style="color:rgba(180,165,140,0.5);">Viernes</span>
+                  <span class="font-accent text-xs text-bronze-400">12:30–16:30 · 20:00–02:00</span>
+                </li>
+                <li class="flex justify-between gap-4">
+                  <span class="font-accent text-xs" style="color:rgba(180,165,140,0.5);">Sábado</span>
+                  <span class="font-accent text-xs text-bronze-400">12:30–17:00 · 20:00–02:00</span>
+                </li>
+                <li class="flex justify-between gap-4">
+                  <span class="font-accent text-xs" style="color:rgba(180,165,140,0.5);">Domingo</span>
+                  <span class="font-accent text-xs text-bronze-400">12:30–17:00 · 20:00–00:00</span>
+                </li>
+                <li class="flex justify-between gap-4">
+                  <span class="font-accent text-xs" style="color:rgba(180,165,140,0.5);">Lunes</span>
+                  <span class="font-accent text-xs text-bronze-400">20:00–00:00</span>
+                </li>
+                <li class="flex justify-between gap-4">
+                  <span class="font-accent text-xs" style="color:rgba(180,165,140,0.5);">Martes</span>
+                  <span class="font-accent text-xs" style="color:rgba(239,68,68,0.7);">Cerrado</span>
+                </li>
               </ul>
             </div>
 
@@ -60,13 +80,13 @@ import { TranslateModule } from '@ngx-translate/core';
                   <div class="w-7 h-7 border flex items-center justify-center shrink-0 mt-0.5" style="border-color:rgba(212,175,55,0.2);">
                     <svg class="w-3 h-3 text-bronze-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                   </div>
-                  <span class="font-accent text-sm" style="color:rgba(180,165,140,0.5);">123 Avenue des Champs-Élysées, 75008 Paris</span>
+                  <span class="font-accent text-sm" style="color:rgba(180,165,140,0.5);">Pl. Candelaria, 3, 11005 Cádiz, España</span>
                 </li>
                 <li class="flex items-center gap-3">
                   <div class="w-7 h-7 border flex items-center justify-center shrink-0" style="border-color:rgba(212,175,55,0.2);">
                     <svg class="w-3 h-3 text-bronze-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                   </div>
-                  <span class="font-accent text-sm" style="color:rgba(180,165,140,0.5);">+33 1 23 45 67 89</span>
+                  <span class="font-accent text-sm" style="color:rgba(180,165,140,0.5);">+34 633 64 40 02</span>
                 </li>
                 <li class="flex items-center gap-3">
                   <div class="w-7 h-7 border flex items-center justify-center shrink-0" style="border-color:rgba(212,175,55,0.2);">

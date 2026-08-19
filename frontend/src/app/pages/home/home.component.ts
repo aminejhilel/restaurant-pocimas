@@ -267,14 +267,14 @@ export class HomeComponent implements OnInit {
   ];
 
   galleryImages = [
-    'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
-    'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80',
-    'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80',
-    'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80',
-    'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80',
-    'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=80',
-    'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=400&q=80',
-    'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=80',
+    'assets/gallery/gallery1.jpg',
+    'assets/gallery/gallery2.jpg',
+    'assets/gallery/gallery3.jpg',
+    'assets/gallery/gallery4.jpg',
+    'assets/gallery/gallery5.jpg',
+    'assets/gallery/gallery6.jpg',
+    'assets/gallery/gallery7.jpg',
+    'assets/gallery/gallery8.jpg',
   ];
 
   constructor(private api: ApiService) { }

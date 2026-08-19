@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { RestaurantTable, Settings, User } from '../../models';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reservation',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   template: `
     <div class="relative pt-32 pb-24 px-6 min-h-screen">
       <!-- Ambient background glow -->
@@ -18,8 +19,8 @@ import { RestaurantTable, Settings, User } from '../../models';
         
         <!-- Header & Steps -->
         <div class="text-center mb-16 animate-in">
-          <p class="section-subtitle">Experience Pócimas</p>
-          <h1 class="font-heading text-4xl md:text-6xl text-cream-100 mb-10">Book Your Table</h1>
+          <p class="section-subtitle">{{ 'RESERVATION.EYEBROW' | translate }}</p>
+          <h1 class="font-heading text-4xl md:text-6xl text-cream-100 mb-10">{{ 'RESERVATION.TITLE' | translate }}</h1>
           
           <div class="flex items-center justify-center max-w-lg mx-auto">
             <div [class]="step >= 1 ? 'step-active' : 'step-pending'">1</div>
@@ -29,9 +30,9 @@ import { RestaurantTable, Settings, User } from '../../models';
             <div [class]="step >= 3 ? 'step-active' : 'step-pending'">3</div>
           </div>
           <div class="flex justify-between max-w-lg mx-auto mt-3 px-1 font-display text-xs uppercase tracking-[0.2em] text-dark-500">
-            <span [class]="step >= 1 ? 'text-bronze-400' : ''" style="transition: color 0.3s">Details</span>
-            <span [class]="step >= 2 ? 'text-bronze-400' : ''" style="transition: color 0.3s">Select Table</span>
-            <span [class]="step >= 3 ? 'text-bronze-400' : ''" style="transition: color 0.3s">Confirm</span>
+            <span [class]="step >= 1 ? 'text-bronze-400' : ''" style="transition: color 0.3s">{{ 'RESERVATION.STEP_DETAILS' | translate }}</span>
+            <span [class]="step >= 2 ? 'text-bronze-400' : ''" style="transition: color 0.3s">{{ 'RESERVATION.STEP_TABLE' | translate }}</span>
+            <span [class]="step >= 3 ? 'text-bronze-400' : ''" style="transition: color 0.3s">{{ 'RESERVATION.STEP_CONFIRM' | translate }}</span>
           </div>
         </div>
 
@@ -41,25 +42,27 @@ import { RestaurantTable, Settings, User } from '../../models';
 
           <!-- STEP 1: Details -->
           <div *ngIf="step === 1" class="animate-in" style="animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
-            <h2 class="font-heading text-3xl text-cream-100 mb-8 text-center">When will you join us?</h2>
+            <h2 class="font-heading text-3xl text-cream-100 mb-8 text-center">{{ 'RESERVATION.WHEN_JOIN' | translate }}</h2>
             
             <form [formGroup]="dateTimeForm" (ngSubmit)="checkAvailability()" class="space-y-8 max-w-3xl mx-auto">
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Date</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.DATE' | translate }}</label>
                   <input formControlName="date" type="date" class="input-field" [min]="minDate">
                 </div>
                 <div>
-                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Time</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.TIME' | translate }}</label>
                   <select formControlName="time" class="input-field">
-                    <option value="" disabled>Select a time</option>
+                    <option value="" disabled>{{ 'RESERVATION.SELECT_TIME' | translate }}</option>
                     <option *ngFor="let t of timeSlots" [value]="t">{{ t }}</option>
                   </select>
                 </div>
                 <div>
-                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Guests</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.GUESTS' | translate }}</label>
                   <select formControlName="guests" class="input-field">
-                    <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{ n }} {{ n === 1 ? 'Person' : 'People' }}</option>
+                    <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">
+                      {{ n }} {{ n === 1 ? ('RESERVATION.PERSON' | translate) : ('RESERVATION.PEOPLE' | translate) }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -67,7 +70,7 @@ import { RestaurantTable, Settings, User } from '../../models';
               <div class="flex justify-center pt-8 border-t border-white/5">
                 <button type="submit" [disabled]="dateTimeForm.invalid || loading" class="btn-primary flex items-center justify-center gap-3 w-full md:w-auto min-w-[200px]">
                   <span *ngIf="loading" class="w-4 h-4 border-2 border-dark-900 border-t-transparent rounded-full animate-spin"></span>
-                  Find a Table
+                  {{ 'RESERVATION.FIND_TABLE' | translate }}
                 </button>
               </div>
             </form>
@@ -77,22 +80,22 @@ import { RestaurantTable, Settings, User } from '../../models';
           <div *ngIf="step === 2" class="animate-in" style="animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 pb-6 border-b border-white/5">
               <div>
-                <h2 class="font-heading text-3xl text-cream-100 mb-2">Select your table</h2>
+                <h2 class="font-heading text-3xl text-cream-100 mb-2">{{ 'RESERVATION.SELECT_TABLE_TITLE' | translate }}</h2>
                 <p class="font-display text-sm text-cream-400">
-                  {{ formatDate(dateTimeForm.value.date) }} at {{ dateTimeForm.value.time }} for {{ dateTimeForm.value.guests }} guests
+                  {{ formatDate(dateTimeForm.value.date) }} at {{ dateTimeForm.value.time }} for {{ dateTimeForm.value.guests }} {{ dateTimeForm.value.guests === 1 ? ('RESERVATION.PERSON' | translate) : ('RESERVATION.PEOPLE' | translate) }}
                 </p>
               </div>
               <button (click)="step = 1" class="font-display text-xs uppercase tracking-widest text-bronze-400/70 hover:text-bronze-400 transition-colors flex items-center gap-2">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                Change Details
+                {{ 'RESERVATION.CHANGE_DETAILS' | translate }}
               </button>
             </div>
 
             <!-- Legend -->
             <div class="flex flex-wrap justify-center gap-8 mb-8 font-display text-xs uppercase tracking-widest text-cream-500">
-              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.3)]"></div> Available</div>
-              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-bronze-400 border border-bronze-400 shadow-gold"></div> Selected</div>
-              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-red-500/10 border border-red-500/40"></div> Unavailable</div>
+              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.3)]"></div> {{ 'RESERVATION.AVAILABLE' | translate }}</div>
+              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-bronze-400 border border-bronze-400 shadow-gold"></div> {{ 'RESERVATION.SELECTED' | translate }}</div>
+              <div class="flex items-center gap-3"><div class="w-3 h-3 rounded-full bg-red-500/10 border border-red-500/40"></div> {{ 'RESERVATION.UNAVAILABLE' | translate }}</div>
             </div>
 
             <!-- Map -->
@@ -100,10 +103,10 @@ import { RestaurantTable, Settings, User } from '../../models';
               <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 20px 20px;"></div>
               
               <div class="absolute top-0 w-full h-10 bg-dark-800/80 backdrop-blur border-b border-white/5 flex items-center justify-center">
-                <span class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">Bar Area</span>
+                <span class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">{{ 'RESERVATION.BAR_AREA' | translate }}</span>
               </div>
               <div class="absolute bottom-0 w-full h-10 bg-dark-800/80 backdrop-blur border-t border-white/5 flex items-center justify-center">
-                <span class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">Window / Street View</span>
+                <span class="font-display text-[10px] uppercase tracking-[0.2em] text-dark-500">{{ 'RESERVATION.WINDOW_VIEW' | translate }}</span>
               </div>
 
               <!-- Tables -->
@@ -125,16 +128,16 @@ import { RestaurantTable, Settings, User } from '../../models';
             <div class="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/5 gap-6">
               <div class="font-display text-sm">
                 <div *ngIf="selectedTable" class="flex items-center gap-3 text-cream-100">
-                  <span class="text-bronze-400">Selected:</span> 
-                  <span>Table {{ selectedTable.table_number }} (Cap: {{ selectedTable.capacity }})</span>
+                  <span class="text-bronze-400">{{ 'RESERVATION.SELECTED_LABEL' | translate }}</span> 
+                  <span>{{ 'RESERVATION.TABLE' | translate }} {{ selectedTable.table_number }} ({{ 'RESERVATION.CAP' | translate }} {{ selectedTable.capacity }})</span>
                 </div>
                 <div *ngIf="!selectedTable" class="text-cream-500 flex items-center gap-2">
                   <svg class="w-4 h-4 animate-pulse text-bronze-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
-                  Please select an available table
+                  {{ 'RESERVATION.PLEASE_SELECT' | translate }}
                 </div>
               </div>
               <button (click)="goToStep3()" [disabled]="!selectedTable" class="btn-primary w-full md:w-auto">
-                Continue to Details
+                {{ 'RESERVATION.CONTINUE' | translate }}
               </button>
             </div>
           </div>
@@ -143,35 +146,35 @@ import { RestaurantTable, Settings, User } from '../../models';
           <div *ngIf="step === 3" class="animate-in" style="animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 pb-6 border-b border-white/5">
               <div>
-                <h2 class="font-heading text-3xl text-cream-100 mb-2">Complete your reservation</h2>
+                <h2 class="font-heading text-3xl text-cream-100 mb-2">{{ 'RESERVATION.CONFIRM_TITLE' | translate }}</h2>
                 <p class="font-display text-sm text-cream-400">
-                  Reservation fee: <span class="text-bronze-400 font-semibold text-lg ml-1">€{{ settings?.reservation_fee | number:'1.2-2' }}</span> <span class="text-xs opacity-70 ml-2">(Deducted from final bill)</span>
+                  {{ 'RESERVATION.RES_FEE' | translate }} <span class="text-bronze-400 font-semibold text-lg ml-1">€{{ settings?.reservation_fee | number:'1.2-2' }}</span> <span class="text-xs opacity-70 ml-2">{{ 'RESERVATION.FEE_NOTE' | translate }}</span>
                 </p>
               </div>
               <button (click)="step = 2" class="font-display text-xs uppercase tracking-widest text-bronze-400/70 hover:text-bronze-400 transition-colors flex items-center gap-2">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                Change Table
+                {{ 'RESERVATION.CHANGE_TABLE' | translate }}
               </button>
             </div>
 
             <form [formGroup]="contactForm" (ngSubmit)="submitReservation()" class="space-y-6 max-w-3xl mx-auto">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Full Name *</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.FULL_NAME' | translate }}</label>
                   <input formControlName="customer_name" class="input-field" placeholder="John Doe">
                 </div>
                 <div>
-                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Email *</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.EMAIL' | translate }}</label>
                   <input formControlName="customer_email" type="email" class="input-field" placeholder="john@example.com">
                 </div>
                 <div class="md:col-span-2">
-                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Phone Number *</label>
+                  <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.PHONE' | translate }}</label>
                   <input formControlName="customer_phone" class="input-field" placeholder="+33 1 23 45 67 89">
                 </div>
               </div>
               <div>
-                <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">Special Requests <span class="text-dark-500 lowercase">(Optional)</span></label>
-                <textarea formControlName="special_request" rows="3" class="input-field resize-none" placeholder="Allergies, anniversaries..."></textarea>
+                <label class="font-display text-xs uppercase tracking-widest text-cream-500 mb-3 block">{{ 'RESERVATION.SPECIAL_REQ' | translate }} <span class="text-dark-500 lowercase">{{ 'RESERVATION.OPTIONAL' | translate }}</span></label>
+                <textarea formControlName="special_request" rows="3" class="input-field resize-none" [placeholder]="'RESERVATION.SPECIAL_PH' | translate"></textarea>
               </div>
 
               <div *ngIf="error" class="bg-red-900/20 border border-red-500/30 text-red-400 p-4 rounded-md font-display text-sm flex items-start gap-3">
@@ -182,7 +185,7 @@ import { RestaurantTable, Settings, User } from '../../models';
               <div class="flex justify-end pt-8 border-t border-white/5">
                 <button type="submit" [disabled]="contactForm.invalid || loading" class="btn-primary flex items-center justify-center gap-3 w-full md:w-auto min-w-[250px]">
                   <span *ngIf="loading" class="w-4 h-4 border-2 border-dark-900 border-t-transparent rounded-full animate-spin"></span>
-                  {{ loading ? 'Processing...' : 'Confirm Reservation' }}
+                  {{ loading ? ('RESERVATION.PROCESSING' | translate) : ('RESERVATION.CONFIRM_BTN' | translate) }}
                 </button>
               </div>
             </form>
@@ -214,7 +217,8 @@ export class ReservationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private api: ApiService,
-    private auth: AuthService
+    private auth: AuthService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -345,6 +349,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
 
   formatDate(dateStr: string): string {
     if (!dateStr) return '';
-    return new Date(dateStr).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    const lang = this.translate.currentLang || 'es';
+    return new Date(dateStr).toLocaleDateString(lang, { weekday: 'long', month: 'long', day: 'numeric' });
   }
 }

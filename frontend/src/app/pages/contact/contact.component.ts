@@ -30,8 +30,8 @@ import { ApiService } from '../../services/api.service';
               </div>
               <div>
                 <p class="font-accent text-xs text-bronze-400 uppercase tracking-widest mb-1">{{ 'CONTACT.ADDRESS' | translate }}</p>
-                <p class="font-accent text-cream-300">123 Avenue des Champs-Élysées</p>
-                <p class="font-accent text-cream-300">75008 Paris, France</p>
+                <p class="font-accent text-cream-300">Pl. Candelaria, 3</p>
+                <p class="font-accent text-cream-300">11005 Cádiz, España</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -40,7 +40,7 @@ import { ApiService } from '../../services/api.service';
               </div>
               <div>
                 <p class="font-accent text-xs text-bronze-400 uppercase tracking-widest mb-1">{{ 'CONTACT.PHONE' | translate }}</p>
-                <p class="font-accent text-cream-300">+33 1 23 45 67 89</p>
+                <p class="font-accent text-cream-300">+34 633 64 40 02</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
@@ -57,9 +57,33 @@ import { ApiService } from '../../services/api.service';
                 <svg class="w-4 h-4 text-bronze-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </div>
               <div>
-                <p class="font-accent text-xs text-bronze-400 uppercase tracking-widest mb-1">{{ 'CONTACT.HOURS' | translate }}</p>
-                <p class="font-accent text-cream-300">{{ 'CONTACT.HOURS_VAL' | translate }}</p>
-                <p class="font-accent text-cream-300">18:00 – 23:00</p>
+                <p class="font-accent text-xs text-bronze-400 uppercase tracking-widest mb-3">{{ 'CONTACT.HOURS' | translate }}</p>
+                <table class="w-full font-accent text-sm">
+                  <tr>
+                    <td class="text-cream-500 pr-4 pb-1.5">Mar.</td>
+                    <td class="text-red-400/70 pb-1.5">Cerrado</td>
+                  </tr>
+                  <tr>
+                    <td class="text-cream-500 pr-4 pb-1.5">Mié. – Jue.</td>
+                    <td class="text-cream-300 pb-1.5">12:30–16:00 · 20:00–00:00</td>
+                  </tr>
+                  <tr>
+                    <td class="text-cream-500 pr-4 pb-1.5">Vie.</td>
+                    <td class="text-cream-300 pb-1.5">12:30–16:30 · 20:00–02:00</td>
+                  </tr>
+                  <tr>
+                    <td class="text-cream-500 pr-4 pb-1.5">Sáb.</td>
+                    <td class="text-cream-300 pb-1.5">12:30–17:00 · 20:00–02:00</td>
+                  </tr>
+                  <tr>
+                    <td class="text-cream-500 pr-4 pb-1.5">Dom.</td>
+                    <td class="text-cream-300 pb-1.5">12:30–17:00 · 20:00–00:00</td>
+                  </tr>
+                  <tr>
+                    <td class="text-cream-500 pr-4">Lun.</td>
+                    <td class="text-cream-300">20:00–00:00</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
@@ -67,7 +91,7 @@ import { ApiService } from '../../services/api.service';
           <!-- Google Maps placeholder -->
           <div class="aspect-video bg-dark-800 border border-cream-800/20 flex items-center justify-center overflow-hidden">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047342144!2d2.3013!3d48.8698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc4b84ad265%3A0x6b7d0e7f5e6b7c7c!2sChamps-%C3%89lys%C3%A9es!5e0!3m2!1sen!2sfr!4v1680000000000!5m2!1sen!2sfr"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.8!2d-6.2894!3d36.5291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0dd1b5a6b0a5c7%3A0x5537c98f8a7c1316!2sPl.%20Candelaria%2C%203%2C%2011005%20C%C3%A1diz!5e0!3m2!1ses!2ses!4v1680000000000!5m2!1ses!2ses"
               class="w-full h-full border-0 opacity-80" 
               allowfullscreen
               loading="lazy">

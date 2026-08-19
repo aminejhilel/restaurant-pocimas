@@ -25,8 +25,8 @@ import { LanguageService, SupportedLanguage } from '../../services/language.serv
         <!-- Logo -->
         <a routerLink="/" class="flex items-center gap-3 group relative">
           <div class="relative">
-            <span class="font-heading text-2xl tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.3em]"
-                  style="background: linear-gradient(90deg, #c8a42e, #f0d980, #D4AF37); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+             <span class="font-heading text-2xl tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.3em]"
+                   style="color: #D4AF37; background: linear-gradient(90deg, #c8a42e, #f0d980, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
               Pócimas
             </span>
             <div class="absolute -bottom-1 left-0 w-0 group-hover:w-full h-px transition-all duration-500"
