@@ -5,10 +5,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ApiService } from '../../services/api.service';
 import { Settings } from '../../models';
 
+import { AccordionGalleryComponent } from '../../components/accordion-gallery/accordion-gallery.component';
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, RouterLink, TranslateModule, AccordionGalleryComponent],
   styles: [`
     /* ── Hero Carousel ── */
     .hero-slide {
@@ -197,19 +199,29 @@ import { Settings } from '../../models';
     <!-- ═══════════════════════════════════════════ GALLERY ═══ -->
     <section class="py-28 px-6">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-20">
+        <div class="text-center mb-16">
           <p class="section-subtitle">{{ 'GALLERY.SUBTITLE' | translate }}</p>
           <h2 class="section-title">{{ 'GALLERY.TITLE' | translate }}</h2>
           <div class="gold-divider"></div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          <div *ngFor="let img of galleryImages; let i = index"
-               class="gallery-item overflow-hidden"
-               [class]="(i === 0 || i === 5) ? 'col-span-2 row-span-2' : ''"
-               [style.minHeight]="(i === 0 || i === 5) ? '400px' : '200px'">
-            <img [src]="img" alt="Gallery" class="w-full h-full object-cover">
-          </div>
-        </div>
+        <app-accordion-gallery
+          [items]="galleryItems"
+          [defaultIndex]="2"
+          [height]="520"
+          [gap]="6"
+          [radius]="4"
+          [expandRatio]="0.52"
+          [duration]="0.6"
+          [ease]="'power3.out'"
+          [parallax]="0.5"
+          [tilt]="6"
+          [showLabels]="true"
+          [grayscale]="false"
+          accentColor="#D4AF37"
+          overlayColor="#05000e"
+          textColor="#ffffff"
+          trigger="hover"
+        ></app-accordion-gallery>
       </div>
     </section>
 
@@ -266,15 +278,12 @@ export class HomeComponent implements OnInit {
     { value: '120+', label: 'Signature Dishes' },
   ];
 
-  galleryImages = [
-    'assets/gallery/gallery1.jpg',
-    'assets/gallery/gallery2.jpg',
-    'assets/gallery/gallery3.jpg',
-    'assets/gallery/gallery4.jpg',
-    'assets/gallery/gallery5.jpg',
-    'assets/gallery/gallery6.jpg',
-    'assets/gallery/gallery7.jpg',
-    'assets/gallery/gallery8.jpg',
+  galleryItems = [
+    { image: 'assets/gallery/gallery1.jpg', label: 'Cuisine', link: '#' },
+    { image: 'assets/gallery/gallery2.jpg', label: 'Ambiance', link: '#' },
+    { image: 'assets/gallery/gallery3.jpg', label: 'Saveurs', link: '#' },
+    { image: 'assets/gallery/gallery4.jpg', label: 'Détails', link: '#' },
+    { image: 'assets/gallery/gallery5.jpg', label: 'Moments', link: '#' },
   ];
 
   constructor(private api: ApiService) { }

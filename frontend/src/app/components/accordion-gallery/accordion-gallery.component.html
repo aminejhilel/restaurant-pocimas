@@ -1,0 +1,46 @@
+<div
+  #root
+  class="accordion-gallery"
+  [class.accordion-gallery--vertical]="orientation === 'vertical'"
+  [class]="className"
+  [style.--ag-accent]="accentColor"
+  [style.--ag-overlay]="overlayColor"
+  [style.--ag-text]="textColor"
+  [style.--ag-gap]="gap + 'px'"
+  [style.--ag-radius]="radius + 'px'"
+  [style.height]="orientation === 'vertical' ? (height * 1.6) + 'px' : height + 'px'"
+  role="list"
+  aria-label="Image accordion gallery"
+>
+  @for (item of items; track $index) {
+    <a
+      #panel
+      class="ag-panel"
+      [class.ag-panel--active]="active === $index"
+      [style.borderRadius]="radius + 'px'"
+      [href]="item.link || undefined"
+      (click)="handleClick($index, $event)"
+      (mouseenter)="handleEnter($index)"
+      (focus)="active = $index"
+      (keydown)="handleKeyDown($index, $event)"
+      role="listitem"
+      tabindex="0"
+      [attr.aria-current]="active === $index ? 'true' : undefined"
+      [attr.aria-label]="item.label"
+    >
+      <span class="ag-panel__frame" [style.borderRadius]="radius + 'px'">
+        <span #media class="ag-panel__media">
+          <img [src]="item.image" [alt]="item.alt || item.label || ''" draggable="false" />
+        </span>
+        <span class="ag-panel__overlay" aria-hidden="true"></span>
+      </span>
+      
+      @if (showLabels) {
+        <span class="ag-panel__label" aria-hidden="true">
+          <span #bar class="ag-panel__bar"></span>
+          <span #text class="ag-panel__text">{{ item.label }}</span>
+        </span>
+      }
+    </a>
+  }
+</div>

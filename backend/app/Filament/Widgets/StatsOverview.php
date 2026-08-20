@@ -7,6 +7,7 @@ use App\Models\MenuItem;
 use App\Models\Reservation;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Carbon;
 
 class StatsOverview extends BaseWidget
 {
@@ -14,24 +15,51 @@ class StatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
+        // Sparkline: last 7 days reservation counts
+        $last7 = collect(range(6, 0))->map(
+            fn ($d) => Reservation::whereDate('created_at', now()->subDays($d))->count()
+        )->toArray();
+
+        // Sparkline: last 7 days contact messages
+        $last7Messages = collect(range(6, 0))->map(
+            fn ($d) => ContactMessage::whereDate('created_at', now()->subDays($d))->count()
+        )->toArray();
+
+        // Today's reservations
+        $todayCount = Reservation::whereDate('reservation_date', today())->count();
+
+        // Pending reservations
+        $pendingCount = Reservation::where('reservation_status', 'pending')->count();
+
         return [
             Stat::make('Réservations Totales', Reservation::count())
-                ->description('Toutes les réservations')
+                ->description('Toutes les réservations enregistrées')
                 ->descriptionIcon('heroicon-m-calendar-days')
                 ->color('primary')
-                ->chart([7, 2, 10, 3, 15, 4, 17]),
+                ->chart($last7),
 
-            Stat::make('Plats au Menu', MenuItem::count())
-                ->description('Plats actifs')
-                ->descriptionIcon('heroicon-m-book-open')
+            Stat::make("Aujourd'hui", $todayCount)
+                ->description('Réservations pour aujourd\'hui')
+                ->descriptionIcon('heroicon-m-clock')
                 ->color('success')
-                ->chart([3, 5, 4, 7, 5, 8, 9]),
+                ->chart(collect(range(6, 0))->map(
+                    fn ($d) => Reservation::whereDate('reservation_date', now()->subDays($d))->count()
+                )->toArray()),
+
+            Stat::make('En Attente', $pendingCount)
+                ->description('Réservations à confirmer')
+                ->descriptionIcon('heroicon-m-exclamation-circle')
+                ->color('warning')
+                ->chart(collect(range(6, 0))->map(
+                    fn ($d) => Reservation::whereDate('created_at', now()->subDays($d))
+                        ->where('reservation_status', 'pending')->count()
+                )->toArray()),
 
             Stat::make('Messages Reçus', ContactMessage::count())
-                ->description('Demandes clients')
+                ->description('Demandes clients non lues: ' . ContactMessage::where('status', 'new')->count())
                 ->descriptionIcon('heroicon-m-envelope')
-                ->color('warning')
-                ->chart([1, 0, 2, 0, 1, 3, 2]),
+                ->color('info')
+                ->chart($last7Messages),
         ];
     }
 }
