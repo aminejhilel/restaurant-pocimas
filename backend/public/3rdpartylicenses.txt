@@ -5,6 +5,11 @@ License: "SEE LICENSE IN LICENSE"
 
 
 --------------------------------------------------------------------------------
+Package: gsap
+License: "Standard 'no charge' license: https://gsap.com/standard-license."
+
+
+--------------------------------------------------------------------------------
 Package: @angular/forms
 License: "MIT"
 

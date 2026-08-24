@@ -146,9 +146,10 @@ import { LanguageService, SupportedLanguage } from '../../services/language.serv
       .nav-link {
         font-family: inherit;
         font-size: 10px;
+        font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0.2em;
-        color: rgba(225,215,200,0.7);
+        color: #ffffff;
         transition: all 0.3s;
         padding: 4px 0;
         position: relative;
