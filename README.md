@@ -1,4 +1,3 @@
 ***
 Restaurant Pocimas
 ----
-welcome to  
