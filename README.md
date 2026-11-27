@@ -1,4 +1,4 @@
 ***
 Restaurant Pocimas
 ----
-welcome to restaurant pocimas
+welcome to restaurant 
