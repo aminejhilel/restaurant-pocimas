@@ -1,4 +1,4 @@
 ***
 Restaurant Pocimas
 ----
-opana
+npm run dev
